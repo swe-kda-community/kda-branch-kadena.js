@@ -3,19 +3,19 @@
     "name": "@kadena/agent-skills",
     "version": "0.1.0",
     "private": false,
-    "path": "packages/libs/agent-skills"
+    "path": "packages/extras/seal-labs-extras/agent-skills"
   },
   {
     "name": "@kadena/ai-tools",
     "version": "0.1.0",
     "private": false,
-    "path": "packages/libs/ai-tools"
+    "path": "packages/extras/seal-labs-extras/ai-tools"
   },
   {
     "name": "@kadena/apptui-config",
     "version": "0.1.0",
     "private": false,
-    "path": "packages/tools/apptui-config"
+    "path": "packages/extras/seal-labs-extras/apptui-config"
   },
   {
     "name": "@kadena/bootstrap-lib",
@@ -159,7 +159,7 @@
     "name": "@kadena/mcp-server",
     "version": "0.1.0",
     "private": false,
-    "path": "packages/tools/mcp-server"
+    "path": "packages/extras/seal-labs-extras/mcp-server"
   },
   {
     "name": "@kadena/pactjs",

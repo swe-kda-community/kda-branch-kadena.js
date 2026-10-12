@@ -1,0 +1,116 @@
+import type { BlocksFromHeightQuery } from '@/__generated__/sdk';
+import { BlocksFromHeightDocument } from '@/__generated__/sdk';
+import { blockHeightLoading } from '@/components/BlockTable/loadingBlockHeightData';
+import { FormatLinkWrapper } from '@/components/CompactTable/FormatLinkWrapper';
+import { LayoutBody } from '@/components/Layout/components/LayoutBody';
+import { LayoutHeader } from '@/components/Layout/components/LayoutHeader';
+import { Layout } from '@/components/Layout/Layout';
+import { ValueLoader } from '@/components/LoadingSkeleton/ValueLoader/ValueLoader';
+import { NoSearchResults } from '@/components/Search/NoSearchResults/NoSearchResults';
+import { useQueryContext } from '@/context/queryContext';
+import { useSearch } from '@/context/searchContext';
+import { block } from '@/graphql/queries/block.graph';
+import { useGraphQuery } from '@/hooks/graphquery';
+import { useRouter } from '@/hooks/router';
+import { truncateValues } from '@/services/format';
+import { CompactTable } from '@kadena/kode-ui/patterns';
+
+import React, { useEffect, useState } from 'react';
+
+const Height: React.FC = () => {
+  const router = useRouter();
+  const { setIsLoading, isLoading } = useSearch();
+  const [innerData, setInnerData] =
+    useState<BlocksFromHeightQuery>(blockHeightLoading);
+  const { setQueries } = useQueryContext();
+
+  const blockHeightVariables = {
+    first: 200,
+    startHeight: parseInt(router.query.height as string),
+    endHeight: parseInt(router.query.height as string),
+  };
+
+  useEffect(() => {
+    setQueries([{ query: block, variables: blockHeightVariables }]);
+  }, []);
+
+  const { loading, data, error } = useGraphQuery(
+    BlocksFromHeightDocument,
+    {
+      variables: blockHeightVariables,
+      skip: !(router.query.height as string),
+    },
+    {
+      errorLabel: 'Loading of block height data failed',
+    },
+  );
+
+  useEffect(() => {
+    if (loading) {
+      setIsLoading(true);
+      return;
+    }
+
+    if (error) {
+      setIsLoading(false);
+      setInnerData({} as BlocksFromHeightQuery);
+    }
+
+    if (data) {
+      setTimeout(() => {
+        setIsLoading(false);
+        setInnerData(data);
+      }, 200);
+    }
+  }, [loading, data, error]);
+
+  if (!innerData || !innerData.blocksFromHeight)
+    return (
+      <Layout layout="full">
+        <LayoutBody>
+          <NoSearchResults />
+        </LayoutBody>
+      </Layout>
+    );
+
+  return (
+    <Layout layout="full">
+      <LayoutHeader>
+        <ValueLoader isLoading={isLoading}>
+          Block Height{' '}
+          {truncateValues(router.query.height as string, {
+            length: 16,
+            endChars: 5,
+          })}
+        </ValueLoader>
+      </LayoutHeader>
+
+      <LayoutBody>
+        <CompactTable
+          isLoading={isLoading}
+          fields={[
+            {
+              label: 'ChainId',
+              key: 'node.chainId',
+              width: '20%',
+            },
+            {
+              label: 'Height',
+              key: 'node.height',
+              width: '20%',
+            },
+            {
+              label: 'Hash',
+              key: 'node.hash',
+              width: '60%',
+              render: FormatLinkWrapper({ url: '/block/:value' }),
+            },
+          ]}
+          data={innerData?.blocksFromHeight.edges ?? []}
+        />
+      </LayoutBody>
+    </Layout>
+  );
+};
+
+export default Height;

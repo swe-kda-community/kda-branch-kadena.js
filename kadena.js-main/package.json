@@ -1,0 +1,53 @@
+{
+  "name": "@kadena/js-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kadena JS monorepo",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "build": "turbo run build",
+    "build:e2e": "turbo run build:e2e",
+    "format": "pnpm run /^format:.*/",
+    "format:labels": "jiti packages/tools/scripts/generate-labels.ts",
+    "format:md": "remark **/CHANGELOG.md *.md docs/*.md -o --use @kadena-dev/markdown",
+    "format:pkgs": "jiti packages/tools/scripts/generate-packages-json.ts",
+    "format:src": "prettier . \"!packages\" --cache --write",
+    "preinstall": "npx --no-install only-allow pnpm",
+    "knip": "knip",
+    "lint": "pnpm run /^lint:.*/",
+    "lint:dependencies": "syncpack list-mismatches",
+    "lint:labels": "jiti packages/tools/scripts/validate-labels.ts",
+    "lint:prettier": "prettier . \"!packages\" --cache --check",
+    "publish": "changeset publish",
+    "select": "git checkout .changeset/config.json && jiti --no-warnings ./packages/tools/scripts/publish-set.ts",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "test:integration": "turbo run test:integration",
+    "tui": "apptui",
+    "version": "changeset version && pnpm run format:pkgs && pnpm run format:md"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.30.0",
+    "@kadena-dev/markdown": "workspace:*",
+    "buffer": "^6.0.3",
+    "jiti": "^2.4.2",
+    "knip": "^5.50.0",
+    "only-allow": "^1.2.2",
+    "prettier": "~3.5.3",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-packagejson": "^2.5.22",
+    "syncpack": "^13.0.0",
+    "turbo": "2.5.4"
+  },
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=18 <23",
+    "pnpm": ">=9 <11"
+  },
+  "pnpm": {
+    "overrides": {
+      "@vanilla-extract/esbuild-plugin>esbuild": "0.21.5",
+      "valtio>use-sync-external-store": "*"
+    }
+  }
+}

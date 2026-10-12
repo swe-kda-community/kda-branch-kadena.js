@@ -1,0 +1,47 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "stream",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "lib/**"],
+      "outputLogs": "new-only"
+    },
+    "build:e2e": {
+      "dependsOn": ["^build"],
+      "outputLogs": "new-only"
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**/*.ts", "src/**/*.tsx"],
+      "outputLogs": "new-only"
+    },
+    "test:integration": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**/*.ts", "src/**/*.tsx"],
+      "outputLogs": "new-only"
+    },
+    "test:e2e": {
+      "inputs": ["tests/**/*.ts", "tests/**/*.tsx"],
+      "outputs": ["blob-report/**"],
+      "outputLogs": "new-only"
+    },
+    "lint": {
+      "dependsOn": ["build"],
+      "inputs": [
+        "**/*.css",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.js",
+        "**/*.cjs",
+        "**/*.mjs",
+        "**/*.json"
+      ],
+      "outputLogs": "new-only"
+    },
+    "format": {
+      "dependsOn": ["build"],
+      "outputLogs": "new-only"
+    }
+  }
+}

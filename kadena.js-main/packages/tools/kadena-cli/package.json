@@ -1,0 +1,107 @@
+{
+  "name": "@kadena/kadena-cli",
+  "version": "1.4.6",
+  "description": "Kadena CLI tool to interact with the Kadena blockchain (manage keys, transactions, etc.)",
+  "keywords": [
+    "Kadena",
+    "CLI",
+    "Contracts",
+    "Transactions",
+    "Wallet",
+    "Sign"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kadena-community/kadena.js.git",
+    "directory": "packages/tools/kadena-cli"
+  },
+  "license": "BSD-3-Clause",
+  "contributors": [
+    "Danillo Felixdaal <danillo@kadena.io>",
+    "Albert Groothedde <albert@kadena.io",
+    "Jesse van Muijden <jesse@kadena.io",
+    "Jermaine Jong <jermaine@kadena.io",
+    "Javad Khalilian <javad@kadena.io>",
+    "Mohamed Ismail <mohamed@kadena.io>",
+    "Bart Huijgen <bart@kadena.io>"
+  ],
+  "type": "module",
+  "main": "./lib/index.js",
+  "bin": {
+    "kadena": "./lib/index.js"
+  },
+  "files": [
+    "lib/**/*.js",
+    "!lib/**/*.js.map",
+    "!lib/**/*.d.ts",
+    "!lib/**/*.d.ts.map"
+  ],
+  "scripts": {
+    "build": "pnpm run generate:all && tsc",
+    "bundle": "rollup -c rollup.config.mjs",
+    "dev": "swc --config-file .swcrc ./src -d lib --strip-leading-paths -q && NODE_ENV=development KADENA_LOG=debug node lib/index.js",
+    "format": "pnpm run /^format:.*/",
+    "format:md": "remark README.md -o --use @kadena-dev/markdown",
+    "format:src": "prettier config src --write",
+    "generate:all": "cache-sh -i \"node_modules/.kadena/**\" -- pnpm run \"/^generate:pact:.*/\"",
+    "generate:pact:faucet": "pactjs contract-generate --contract user.coin-faucet --api https://api.testnet.chainweb-community.org/chainweb/0.0/testnet06/chain/1/pact",
+    "generate:pact:kdn:mainnet": "pactjs contract-generate --contract n_32faa22a75da53789d48dcbcb124a11c8f8651a8.kadena-names --api https://api.testnet.chainweb-community.org/chainweb/0.0/testnet06/chain/1/pact",
+    "generate:pact:kdn:testnet": "pactjs contract-generate --contract n_32faa22a75da53789d48dcbcb124a11c8f8651a8.herdyracle --api https://api.testnet.chainweb-community.org/chainweb/0.0/testnet06/chain/1/pact",
+    "kadena": "swc --config-file .swcrc ./src -d lib --strip-leading-paths -q && node lib/index.js",
+    "lint": "eslint src --ext .js,.ts --fix",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "watch": "tsc --watch"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "3.3.0",
+    "@kadena/client": "workspace:^",
+    "@kadena/client-utils": "workspace:*",
+    "@kadena/cryptography-utils": "workspace:*",
+    "@kadena/hd-wallet": "workspace:*",
+    "@kadena/pactjs": "workspace:*",
+    "@kadena/pactjs-cli": "workspace:^",
+    "@kadena/pactjs-generator": "workspace:*",
+    "@scure/bip39": "1.2.1",
+    "chalk": "^5.6.2",
+    "cli-table3": "0.6.4",
+    "commander": "^11.1.0",
+    "js-yaml": "~4.1.1",
+    "memfs": "~3.5.3",
+    "ora": "7.0.1",
+    "sanitize-filename": "1.6.3",
+    "seedrandom": "~3.0.5",
+    "ttys": "0.0.3",
+    "zod": "~3.25.76"
+  },
+  "devDependencies": {
+    "@kadena-dev/eslint-config": "workspace:*",
+    "@kadena-dev/markdown": "workspace:*",
+    "@kadena-dev/shared-config": "workspace:*",
+    "@kadena/types": "workspace:*",
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.3.1",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@rushstack/eslint-config": "~3.6.10",
+    "@rushstack/heft": "~0.50.7",
+    "@swc/cli": "^0.4.0",
+    "@swc/core": "~1.3.107",
+    "@types/heft-jest": "~1.0.6",
+    "@types/js-yaml": "4.0.9",
+    "@types/node": "^22.15.0",
+    "@types/seedrandom": "~3.0.8",
+    "@vitest/coverage-v8": "^3.2.4",
+    "cache-sh": "^1.3.1",
+    "eslint": "^8.57.1",
+    "msw": "^2.12.14",
+    "prettier": "~3.5.3",
+    "rollup": "^4.60.1",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

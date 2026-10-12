@@ -1,0 +1,198 @@
+Release:
+  - head-branch:
+      - changeset-release/main
+Github Config & Actions:
+  - changed-files:
+      - any-glob-to-any-file: .github/*
+'@kadena/bootstrap-lib':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/bootstrap-lib/*
+'@kadena/chainweb-evm-dashboard':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/chainweb-evm-dashboard/*
+'@kadena/chainweb-node-client':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/chainweb-node-client/*
+'@kadena/chainweb-stream-client':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/chainweb-stream-client/*
+'@kadena/chainwebjs':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/chainwebjs/*
+'@kadena/client':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/client/*
+'@kadena/client-examples':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/client-examples/*
+'@kadena/client-utils':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/client-utils/*
+'@kadena/cookbook':
+  - changed-files:
+      - any-glob-to-any-file: packages/tools/cookbook/*
+'@kadena/create-kadena-app':
+  - changed-files:
+      - any-glob-to-any-file: packages/tools/create-kadena-app/*
+'@kadena/cryptography-utils':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/cryptography-utils/*
+'@kadena/dev-wallet':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/dev-wallet/*
+'@kadena/dev-wallet-desktop':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/dev-wallet-desktop/*
+'@kadena/explorer':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/explorer/*
+'@kadena/graph-proxy':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/graph-proxy/*
+'@kadena/rwa-demo':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/rwa-demo/*
+'@kadena/graph':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/graph/*
+'@kadena/hd-wallet':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/hd-wallet/*
+'@kadena/js-monorepo':
+  - changed-files:
+      - any-glob-to-any-file: ./*
+'@kadena/kadena-cli':
+  - changed-files:
+      - any-glob-to-any-file: packages/tools/kadena-cli/*
+'@kadena/kda-cli':
+  - changed-files:
+      - any-glob-to-any-file: packages/tools/kda-cli/*
+'@kadena/pactjs':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/pactjs/*
+'@kadena/pactjs-cli':
+  - changed-files:
+      - any-glob-to-any-file: packages/tools/pactjs-cli/*
+'@kadena/pactjs-generator':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/pactjs-generator/*
+'@kadena/proof-of-us':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/proof-of-us/*
+'@kadena/kode-icons':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/kode-icons/*
+'@kadena/kode-ui':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/kode-ui/*
+'@kadena/spirekey-example':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/spirekey-example/*
+'@kadena/toolbox':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/toolbox/*
+'@kadena/tools':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/tools/*
+'@kadena/types':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/types/*
+'@kadena-dev/e2e-base':
+  - changed-files:
+      - any-glob-to-any-file: packages/e2e/e2e-base/*
+'@kadena-dev/eslint-config':
+  - changed-files:
+      - any-glob-to-any-file: packages/tools/eslint-config/*
+'@kadena-dev/eslint-plugin':
+  - changed-files:
+      - any-glob-to-any-file: packages/tools/eslint-plugin/*
+'@kadena-dev/integration-tests':
+  - changed-files:
+      - any-glob-to-any-file: packages/tools/integration-tests/*
+'@kadena-dev/lint-package':
+  - changed-files:
+      - any-glob-to-any-file: packages/tools/lint-package/*
+'@kadena-dev/markdown':
+  - changed-files:
+      - any-glob-to-any-file: packages/tools/markdown/*
+'@kadena-dev/scripts':
+  - changed-files:
+      - any-glob-to-any-file: packages/tools/scripts/*
+'@kadena-dev/shared-config':
+  - changed-files:
+      - any-glob-to-any-file: packages/tools/shared-config/*
+e2e-docs:
+  - changed-files:
+      - any-glob-to-any-file: packages/e2e/e2e-docs/*
+e2e-graph:
+  - changed-files:
+      - any-glob-to-any-file: packages/e2e/e2e-graph/*
+e2e-tools:
+  - changed-files:
+      - any-glob-to-any-file: packages/e2e/e2e-tools/*
+e2e-dev-wallet:
+  - changed-files:
+      - any-glob-to-any-file: packages/e2e/e2e-dev-wallet/*
+e2e-rwa-demo:
+  - changed-files:
+      - any-glob-to-any-file: packages/e2e/e2e-rwa-demo/*
+kadena.js:
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/kadena.js/*
+e2e-proof-of-us:
+  - changed-files:
+      - any-glob-to-any-file: packages/e2e/e2e-proof-of-us/*
+'@kadena/dev-wallet-example':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/dev-wallet-example/*
+'@kadena/snap':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/snap/*
+'@kadena/wallet-sdk':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/wallet-sdk/*
+wallet-sdk-example-app:
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/wallet-sdk-example/*
+hw-app-kda-clone:
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/hw-app-kda-clone/*
+'@kadena/dev-wallet-plugin':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/dev-wallet-plugin/*
+'@kadena/chainweaver-pact-console-plugin':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/chainweaver-pact-console-plugin/*
+'@kadena/chainweaver-wallet-connect-plugin':
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/chainweaver-wallet-connect-plugin/*
+'@kadena/wallet-adapter-core':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/wallet-adapter-core/*
+'@kadena/wallet-adapter-ecko':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/wallet-adapter-ecko/*
+'@kadena/wallet-adapter-react':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/wallet-adapter-react/*
+wallet-adapter-react-example:
+  - changed-files:
+      - any-glob-to-any-file: packages/apps/wallet-adapter-react-example/*
+'@kadena/wallet-adapter-chainweaver-legacy':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/wallet-adapter-chainweaver-legacy/*
+'@kadena/wallet-adapter-zelcore':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/wallet-adapter-zelcore/*
+'@kadena/wallet-adapter-walletconnect':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/wallet-adapter-walletconnect/*
+'@kadena/wallet-adapter-chainweaver':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/wallet-adapter-chainweaver/*
+'@kadena/wallet-adapter-magic':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/wallet-adapter-magic/*
+'@kadena/wallet-adapter-metamask-snap':
+  - changed-files:
+      - any-glob-to-any-file: packages/libs/wallet-adapter-metamask-snap/*

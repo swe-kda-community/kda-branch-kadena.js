@@ -1,0 +1,19 @@
+name: 'Run end-to-end tests'
+inputs:
+  app:
+    description: 'app under test'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+      - name: Install browsers
+        shell: bash
+        run: pnpm --filter e2e-${{ inputs.app }} run install:chromium
+
+      - name: Build dependencies for e2e tests
+        shell: bash
+        run: pnpm turbo build --filter @kadena-dev/e2e-base^...
+
+      - name: Run end-to-end tests
+        shell: bash
+        run: pnpm turbo test:e2e --filter e2e-${{ inputs.app }}

@@ -1,0 +1,28 @@
+{
+  "name": "@kadena/dev-wallet-example",
+  "version": "0.2.9",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@kadena/client": "workspace:*",
+    "@kadena/client-utils": "workspace:*",
+    "next": "~15.4.11",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "13.4.5",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.8.3"
+  }
+}

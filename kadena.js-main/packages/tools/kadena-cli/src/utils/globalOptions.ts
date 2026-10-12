@@ -1,0 +1,293 @@
+import { Option } from 'commander';
+import { z } from 'zod';
+import {
+  generic,
+  keys,
+  networks,
+  security,
+  tx,
+  wallets,
+} from '../prompts/index.js';
+
+import type { ChainId } from '@kadena/types';
+import { isAbsolute, join } from 'node:path';
+
+import {
+  chainIdValidation,
+  formatZodFieldErrors,
+} from '../commands/account/utils/accountHelpers.js';
+import { parseKeyPairsInput } from '../commands/keys/utils/keysHelpers.js';
+import { loadNetworkConfig } from '../commands/networks/utils/networkHelpers.js';
+import { services } from '../services/index.js';
+import { createOption } from './createOption.js';
+import { getDefaultNetworkName, passwordPromptTransform } from './helpers.js';
+
+// eslint-disable-next-line @rushstack/typedef-var
+export const globalOptions = {
+  // global
+  quiet: createOption({
+    key: 'quiet' as const,
+    // quiet is never prompted
+    prompt: () => false,
+    validation: z.boolean().optional(),
+    option: new Option(
+      '-q --quiet',
+      'Disables interactive prompts and skips confirmations',
+    ),
+  }),
+  json: createOption({
+    key: 'json' as const,
+    // json is never prompted
+    prompt: () => false,
+    validation: z.boolean().optional(),
+    option: new Option(
+      '--json',
+      'Output command data in JSON format on stdout',
+    ),
+  }),
+  yaml: createOption({
+    key: 'yaml' as const,
+    // yaml is never prompted
+    prompt: () => false,
+    validation: z.boolean().optional(),
+    option: new Option(
+      '--yaml',
+      'Output command data in YAML format on stdout',
+    ),
+  }),
+  legacy: createOption({
+    key: 'legacy' as const,
+    prompt: ({ legacy }): boolean => {
+      return legacy === true || legacy === 'true' || false;
+    },
+    validation: z.boolean().optional(),
+    option: new Option(
+      '-l, --legacy',
+      'Use ChainWeaver key derivation methods',
+    ),
+  }),
+  // Logs
+  logFolder: createOption({
+    key: 'logFolder' as const,
+    prompt: generic.logFolderPrompt,
+    validation: z.string(),
+    option: new Option(
+      '-l, --log-folder <logFolder>',
+      'Directory where the log file will be generated. (e.g. ./kadena/simulation-logs/',
+    ),
+  }),
+  // Network
+  network: createOption({
+    key: 'network' as const,
+    prompt: networks.networkSelectPrompt,
+    defaultValue: await getDefaultNetworkName(),
+    validation: z.string(),
+    option: new Option(
+      '-n, --network <network>',
+      'Kadena network (e.g. "mainnet")',
+    ),
+    expand: async (network: string) => {
+      try {
+        return await loadNetworkConfig(network);
+      } catch (e) {
+        throw new Error(
+          `\nNo configuration for network "${network}" found. Please configure the network.\n`,
+        );
+      }
+    },
+  }),
+  networkOptional: createOption({
+    key: 'network' as const,
+    prompt: () => {},
+    defaultValue: await getDefaultNetworkName(),
+    validation: z.string(),
+    defaultIsOptional: true,
+    option: new Option(
+      '-n, --network <network>',
+      'Kadena network (e.g. "mainnet")',
+    ),
+    expand: async (network: string) => {
+      if (network === undefined) return null;
+      try {
+        return await loadNetworkConfig(network);
+      } catch (e) {
+        throw new Error(
+          `\nNo configuration for network "${network}" found. Please configure the network.\n`,
+        );
+      }
+    },
+  }),
+  networkSelect: createOption({
+    key: 'network' as const,
+    prompt: networks.networkSelectOnlyPrompt,
+    defaultIsOptional: false,
+    defaultValue: await getDefaultNetworkName(),
+    validation: z.string(),
+    option: new Option(
+      '-n, --network <network>',
+      'Kadena network (e.g. "mainnet")',
+    ),
+    expand: async (network: string) => {
+      try {
+        return await loadNetworkConfig(network);
+      } catch (e) {
+        throw new Error(
+          `No network configuration found for "${network}". Please create a "${network}" network.`,
+        );
+      }
+    },
+  }),
+  chainId: createOption({
+    key: 'chainId' as const,
+    prompt: networks.chainIdPrompt,
+    defaultIsOptional: false,
+    validation: z.string({
+      /* eslint-disable-next-line @typescript-eslint/naming-convention */
+      invalid_type_error: 'Error: -c, --chain-id must be a number',
+    }),
+    option: new Option('-c, --chain-id <chainId>', 'Kadena chain id (e.g. 0)'),
+    transform: (chainId: string) => {
+      const parsedChainId = Number(chainId.trim());
+      try {
+        chainIdValidation.parse(parsedChainId);
+        return parsedChainId.toString() as ChainId;
+      } catch (error) {
+        const errorMessage = formatZodFieldErrors(error);
+        throw new Error(`Error: -c --chain-id ${errorMessage}`);
+      }
+    },
+  }),
+  chainIdOptional: createOption({
+    key: 'chainId' as const,
+    prompt: networks.chainIdPrompt,
+    defaultIsOptional: true,
+    validation: z.string({
+      /* eslint-disable-next-line @typescript-eslint/naming-convention */
+      invalid_type_error: 'Error: -c, --chain-id must be a number',
+    }),
+    option: new Option('-c, --chain-id <chainId>', 'Kadena chain id (e.g. 0)'),
+    transform: (chainId: string) => {
+      if (!chainId) return null;
+      const parsedChainId = Number(chainId.trim());
+      try {
+        chainIdValidation.parse(parsedChainId);
+        return parsedChainId.toString() as ChainId;
+      } catch (error) {
+        const errorMessage = formatZodFieldErrors(error);
+        throw new Error(`Error: -c --chain-id ${errorMessage}`);
+      }
+    },
+  }),
+  // Keys
+  keyPairs: createOption({
+    key: 'keyPairs',
+    prompt: keys.keyPairsPrompt,
+    validation: z.string(),
+    option: new Option(
+      '-k, --key-pairs <keyPairs>',
+      'Key pairs as string publicKey=xxx,secretKey=xxx;...',
+    ),
+    transform: (input) => {
+      try {
+        return parseKeyPairsInput(input);
+      } catch (error) {
+        throw new Error(`Error parsing key pairs: ${error.message}`);
+      }
+    },
+  }),
+  keyAlias: createOption({
+    key: 'keyAlias',
+    prompt: keys.keyAliasPrompt,
+    validation: z.string(),
+    option: new Option('-a, --key-alias <keyAlias>', 'Alias to store your key'),
+  }),
+  walletSelect: createOption({
+    key: 'walletName',
+    prompt: wallets.walletSelectPrompt,
+    validation: z.string(),
+    option: new Option('-w, --wallet-name <walletName>', 'Wallet name'),
+    defaultIsOptional: false,
+    expand: async (walletAlias: string) => {
+      return await services.wallet.getByAlias(walletAlias);
+    },
+  }),
+  walletsSelectByWallet: createOption({
+    key: 'walletName',
+    prompt: async (args) => {
+      return Array.isArray(args.wallets)
+        ? wallets.walletSelectByWalletPrompt(args.wallets)
+        : wallets.walletSelectPrompt();
+    },
+    validation: z.string(),
+    option: new Option('-w, --wallet-name <walletName>', 'Wallet name'),
+    defaultIsOptional: false,
+    expand: async (walletAlias: string) => {
+      return await services.wallet.getByAlias(walletAlias);
+    },
+  }),
+  // common
+  outFileJson: createOption({
+    key: 'outFile',
+    prompt: tx.outFilePrompt,
+    validation: z.string().optional(),
+    option: new Option(
+      '-o, --out-file <outFile>',
+      'File name to save the output',
+    ),
+    defaultIsOptional: true,
+    transform(value: string) {
+      if (!value) return null;
+      const file = value.endsWith('.json') ? value : `${value}.json`;
+      return isAbsolute(file) ? file : join(process.cwd(), file);
+    },
+  }),
+  directory: createOption({
+    key: 'directory' as const,
+    // Directory is an optional flag, and never prompted
+    prompt: () => null,
+    validation: z.string().optional(),
+    option: new Option(
+      '-d, --directory <directory>',
+      `Config file directory path (default: working directory)`,
+    ),
+    transform(value: string) {
+      if (typeof value !== 'string' || value === '') {
+        return process.cwd();
+      }
+      return value;
+    },
+  }),
+} as const;
+
+export const securityOptions = {
+  createPasswordOption: (
+    args: Parameters<typeof security.passwordPrompt>[0],
+    optionArgs?: Parameters<ReturnType<typeof createOption>>[0],
+  ) => {
+    return createOption({
+      key: 'passwordFile' as const,
+      prompt: security.passwordPrompt(args),
+      validation: z.string().or(z.object({ _password: z.string() })),
+      option: new Option(
+        '--password-file <passwordFile>',
+        'Filepath to the password file',
+      ),
+      transform: passwordPromptTransform('--password-file', args.useStdin),
+    })(optionArgs);
+  },
+  createNewPasswordOption: (
+    args: Parameters<typeof security.passwordPrompt>[0],
+    optionArgs?: Parameters<ReturnType<typeof createOption>>[0],
+  ) => {
+    return createOption({
+      key: 'newPasswordFile' as const,
+      prompt: security.passwordPrompt(args),
+      validation: z.string().or(z.object({ _password: z.string() })),
+      option: new Option(
+        '--new-password-file <newPasswordFile>',
+        'Filepath to the new password file',
+      ),
+      transform: passwordPromptTransform('--new-password-file', args.useStdin),
+    })(optionArgs);
+  },
+};

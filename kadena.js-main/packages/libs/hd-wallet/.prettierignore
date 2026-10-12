@@ -1,0 +1,8 @@
+etc
+dist
+lib
+temp
+src/chainweaver/vendor/**/*
+**/*.md
+!README.md
+tsdoc-metadata.json

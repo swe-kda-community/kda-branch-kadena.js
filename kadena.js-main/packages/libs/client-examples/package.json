@@ -1,0 +1,49 @@
+{
+  "name": "@kadena/client-examples",
+  "version": "0.1.18",
+  "private": true,
+  "description": "Test project to verify pactjs-cli and pactjs-generator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kadena-community/kadena.js.git",
+    "directory": "packages/libs/client-examples"
+  },
+  "license": "BSD-3-Clause",
+  "main": "lib/index.js",
+  "types": "dist/pactjs-generator.d.ts",
+  "scripts": {
+    "prebuild": "pnpm run pactjs:generate:contract:types",
+    "build": "pnpm run prebuild && tsc --noEmit",
+    "format": "pnpm run --sequential /^format:.*/",
+    "format:lint": "pnpm run lint:src --fix",
+    "format:md": "remark README.md -o --use @kadena-dev/markdown",
+    "format:src": "prettier . --cache --write",
+    "gen-marmalade-v2": "pactjs contract-generate --contract marmalade-v2.ledger --chain 8 --api https://api.testnet.chainweb-community.org/chainweb/0.0/testnet06/chain/1/pact;",
+    "lint": "pnpm run /^lint:.*/",
+    "lint:fmt": "prettier . --cache --check",
+    "lint:pkg": "lint-package",
+    "lint:src": "eslint src --ext .js,.ts",
+    "pactjs:generate:contract:types": "pactjs contract-generate --contract free.crowdfund --contract coin --api=https://api.testnet.chainweb-community.org/chainweb/0.0/testnet06/chain/0/pact",
+    "test": ""
+  },
+  "dependencies": {
+    "@kadena/chainweb-node-client": "workspace:*",
+    "@kadena/client": "workspace:*",
+    "@kadena/client-utils": "workspace:*",
+    "@kadena/pactjs": "workspace:*"
+  },
+  "devDependencies": {
+    "@kadena-dev/eslint-config": "workspace:*",
+    "@kadena-dev/lint-package": "workspace:*",
+    "@kadena-dev/markdown": "workspace:*",
+    "@kadena-dev/shared-config": "workspace:*",
+    "@kadena/pactjs-cli": "workspace:*",
+    "@kadena/types": "workspace:*",
+    "@rushstack/eslint-config": "~3.6.10",
+    "@types/node": "^22.15.0",
+    "eslint": "^8.57.1",
+    "prettier": "~3.5.3",
+    "ts-node": "~10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

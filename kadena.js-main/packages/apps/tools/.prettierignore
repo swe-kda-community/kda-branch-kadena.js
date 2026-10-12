@@ -1,0 +1,4 @@
+.next
+**/*.md
+coverage
+tsdoc-metadata.json

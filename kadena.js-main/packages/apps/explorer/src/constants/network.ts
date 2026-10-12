@@ -1,0 +1,36 @@
+export interface INetwork {
+  networkId: string;
+  label: string;
+  slug: string;
+  chainwebUrl: string;
+  graphUrl: string;
+  wsGraphUrl: string;
+  explorerUrl?: string;
+  headers?: Record<string, string>;
+}
+
+export type IEditNetwork = INetwork & {
+  graphUrlIsValid?: boolean;
+  isNew?: boolean;
+};
+
+export const networkConstants: INetwork[] = [
+  {
+    networkId: 'mainnet01',
+    label: 'Mainnet',
+    slug: 'mainnet',
+    chainwebUrl: 'api.chainweb-community.org',
+    graphUrl: 'https://graph.kadena.network/graphql',
+    wsGraphUrl: 'https://graph.kadena.network/graphql',
+    explorerUrl: 'https://explorer.chainweb-community.org/',
+  },
+  {
+    networkId: 'testnet06',
+    label: 'Testnet',
+    slug: 'testnet',
+    chainwebUrl: 'api.testnet.chainweb-community.org',
+    graphUrl: 'https://graph.testnet.kadena.network/graphql',
+    wsGraphUrl: 'https://graph.testnet.kadena.network/graphql',
+    explorerUrl: 'https://explorer.chainweb-community.org/',
+  },
+];

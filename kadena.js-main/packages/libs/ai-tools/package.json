@@ -1,0 +1,55 @@
+{
+  "name": "@kadena/ai-tools",
+  "version": "0.1.0",
+  "description": "AI and LLM utilities for building intelligent Kadena blockchain agents",
+  "keywords": [
+    "kadena",
+    "ai",
+    "llm",
+    "agent",
+    "blockchain"
+  ],
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kadena-community/kadena.js.git",
+    "directory": "packages/libs/ai-tools"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "test": "vitest run",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kadena/client": "workspace:*",
+    "@kadena/client-utils": "workspace:*",
+    "@kadena/types": "workspace:*",
+    "zod": "~3.25.76"
+  },
+  "devDependencies": {
+    "@kadena-dev/shared-config": "workspace:*",
+    "@types/node": "^22.15.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4"
+  },
+  "peerDependencies": {
+    "ai": "^4.0.0",
+    "zod": "~3.25.76"
+  },
+  "peerDependenciesMeta": {
+    "ai": {
+      "optional": true
+    }
+  }
+}

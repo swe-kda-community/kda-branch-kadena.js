@@ -1,0 +1,246 @@
+name: CI (build, lint, test)
+# All pull requests, and
+# Workflow dispatch allows you to run this workflow manually from the Actions tab
+on:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  CI: true
+  # comma separated list of allowed authors for docs PRs
+  # ALLOWED_DOCS_AUTHORS: lsgunnlsgunn,
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  build:
+    name: Build & unit test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          show-progress: false
+
+      - name: Runner setup
+        uses: ./.github/actions/runner-setup
+
+      - name: Lint monorepo root
+        run: pnpm run lint
+
+      - name: Build, lint, test all packages
+        run: pnpm turbo lint build test
+
+  integration-tests:
+    name: INT - ${{ matrix.package }}
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          [
+            '@kadena/client',
+            '@kadena/client-utils',
+            '@kadena/create-kadena-app',
+          ]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          show-progress: false
+
+      - name: Runner Setup
+        uses: ./.github/actions/runner-setup
+
+      - name: Setup Kadena sandbox
+        uses: ./.github/actions/sandbox
+
+      - name: run integration tests
+        run: pnpm run test:integration --filter ${{ matrix.package }}
+
+  end-to-end-tests:
+    name: E2E - ${{ matrix.app }}
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app: ['tools', 'graph', 'dev-wallet']
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          show-progress: false
+
+      -  name: Runner Setup
+         uses: ./.github/actions/runner-setup
+
+      -  name: Setup Kadena sandbox
+         uses: ./.github/actions/sandbox
+
+      - name: Build App with NODE_ENV=test
+        uses: ./.github/actions/build-app-e2e
+        with:
+          app: ${{ matrix.app }}
+
+      - name: Run end-to-end tests
+        uses: ./.github/actions/end-to-end-tests
+        with:
+          app: ${{ matrix.app }}
+
+      - name: Archive sandbox logs
+        uses: ./.github/actions/archive-logs
+        if: always()
+        with:
+          test-object: ${{ matrix.app }}
+
+      - name: Teardown kadena sandbox
+        if: always()
+        run: docker compose down
+        working-directory: .github/actions/sandbox
+
+      - name: Archive volumes
+        uses: ./.github/actions/archive-volumes
+        if: always()
+        with:
+          test-object: ${{ matrix.app }}
+
+      - name: Upload Blob Report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: blob-report-${{ matrix.app }}
+          path: packages/e2e/e2e-${{ matrix.app }}/blob-report/
+          retention-days: 1
+
+  # merge-publish-reports:
+  #  if: ${{ !cancelled() }}
+  #  needs: [end-to-end-tests]
+
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #
+  #  - uses: actions/checkout@v4
+  #    with:
+  #        fetch-depth: 2
+  #        show-progress: false
+
+  #  -  name: Runner Setup
+  #     uses: ./.github/actions/runner-setup
+
+  #  - name: Merge & Publish Report
+  #    uses: ./.github/actions/merge-publish-reports
+  #    with:
+  #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # auto-approve-docs:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #        fetch-depth: 2
+  #        show-progress: false
+
+  #   - name: Check PR author
+  #     id: check_author
+  #     run: echo "author=${{ github.event.pull_request.user.login }}" >> $GITHUB_OUTPUT
+
+  #   - uses: pnpm/action-setup@v3
+  #     if: contains(env.ALLOWED_DOCS_AUTHORS, steps.check_author.outputs.author)
+  #     with:
+  #       version: 9
+
+  #   - uses: actions/setup-node@v4
+  #     if: contains(env.ALLOWED_DOCS_AUTHORS, steps.check_author.outputs.author)
+  #     with:
+  #       node-version: 20
+
+  #   - name: Install dependencies
+  #     if: contains(env.ALLOWED_DOCS_AUTHORS, steps.check_author.outputs.author)
+  #     shell: bash
+  #     run: pnpm install --filter @kadena-dev/scripts
+
+  #   - name: Run file check script
+  #     if: contains(env.ALLOWED_DOCS_AUTHORS, steps.check_author.outputs.author)
+  #     id: check_files
+  #     run: |
+  #       git fetch origin main:refs/remotes/origin/main
+  #       set +e
+  #       chmod +x ./packages/tools/scripts/check-changed-files.mjs
+  #       ./packages/tools/scripts/check-changed-files.mjs
+  #       echo "exitcode=$?" >> $GITHUB_OUTPUT
+  #       exit 0
+
+  #   - name: Approve PR
+  #     if: steps.check_files.outputs.exitcode == 0 && contains(env.ALLOWED_DOCS_AUTHORS, steps.check_author.outputs.author)
+  #     uses: hmarr/auto-approve-action@v4
+  #     with:
+  #       pull-request-number: ${{ github.event.inputs.pullRequestNumber }}
+  #       review-message: "Auto approved by [auto-approve-action](https://github.com/kadena-community/kadena.js/blob/main/.github/workflows/ci.yml#L186)"
+
+  # ci-gate:
+  #  if: always()
+  #  needs:
+  #    - build
+  #    - integration-tests
+  #    - end-to-end-tests
+  #    - merge-publish-reports
+  #  runs-on: Ubuntu-latest
+  #  steps:
+  #    - name: Check required jobs.
+  #      uses: re-actors/alls-green@release/v1
+  #      with:
+  #        jobs: ${{ toJSON(needs) }}
+
+  # docker-build:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     packages: write
+  #   steps:
+  #     - name: Docker meta
+  #       id: meta
+  #       uses: docker/metadata-action@v5
+  #       with:
+  #         images: ghcr.io/kadena-community/graphql
+  #         tags: |
+  #           type=sha
+  #           type=ref,event=branch
+  #           type=ref,event=tag
+  #           type=ref,event=pr
+
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v3
+
+  #     - name: Cache Docker layers
+  #       uses: actions/cache@v4
+  #       with:
+  #         path: /tmp/.buildx-cache
+  #         key: ${{ runner.os }}-buildx-${{ github.sha }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-buildx-
+
+  #     - name: Login to GitHub Container Registry
+  #       uses: docker/login-action@v3
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{ github.actor }}
+  #         password: ${{ secrets.GITHUB_TOKEN }}
+
+  #     - name: Build and push
+  #       id: docker_build
+  #       uses: docker/build-push-action@v6
+  #       with:
+  #         push: true
+  #         context: "{{defaultContext}}:packages/apps/graph"
+  #         file: ./Dockerfile
+  #         tags: ${{ steps.meta.outputs.tags }}
+  #         labels: ${{ steps.meta.outputs.labels }}
+  #         cache-from: type=local,src=/tmp/.buildx-cache
+  #         cache-to: type=local,dest=/tmp/.buildx-cache

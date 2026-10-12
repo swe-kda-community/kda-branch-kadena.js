@@ -1,0 +1,50 @@
+import {
+  atoms,
+  recipe,
+  responsiveStyle,
+  style,
+  token,
+} from '@kadena/kode-ui/styles';
+import { globalStyle } from '@vanilla-extract/css';
+
+export const backgroundClass = recipe({
+  base: [
+    atoms({
+      borderWidth: 'hairline',
+      borderStyle: 'solid',
+      borderRadius: 'xs',
+      paddingInline: 'n2',
+      paddingBlock: 'n1',
+    }),
+  ],
+  variants: {
+    isSelected: {
+      true: {
+        borderColor: token('color.neutral.n99@alpha10'),
+        backgroundColor: token('color.background.input.@active'),
+      },
+      false: {
+        borderColor: token('color.neutral.n99@alpha10'),
+        backgroundColor: token('color.background.input.default'),
+      },
+    },
+  },
+});
+
+export const keyClass = style({
+  ...responsiveStyle({
+    xs: {
+      width: '100%',
+    },
+    md: {
+      width: '50%',
+    },
+  }),
+});
+
+export const labelClass = style({});
+
+globalStyle(`${backgroundClass}[data-isselected="true"] [class^="Checkbox"]`, {
+  color: token('color.text.base.@active'),
+  backgroundColor: token('color.background.input.@active'),
+});

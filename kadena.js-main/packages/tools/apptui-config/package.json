@@ -1,0 +1,20 @@
+{
+  "name": "@kadena/apptui-config",
+  "version": "0.1.0",
+  "private": false,
+  "description": "AppTUI developer TUI config for the kadena.js monorepo",
+  "license": "BSD-3-Clause",
+  "files": [
+    ".apptui.json",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kadena-community/kadena.js.git",
+    "directory": "packages/tools/apptui-config"
+  },
+  "engines": {
+    "node": ">=18 <23",
+    "pnpm": ">=9 <11"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "name": "@kadena/client-utils",
+  "version": "0.13.4",
+  "description": "Utility functions build as a wrapper around @kadena/client",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kadena-community/kadena.js.git",
+    "directory": "packages/libs/client-utils"
+  },
+  "license": "BSD-3-Clause",
+  "contributors": [
+    "Javad Khalilian <javad@kadena.io>",
+    "Albert Groothedde <albert@kadena.io>",
+    "Nil Amrutlal <nil.amrutlal@deptagency.com>"
+  ],
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "import": "./lib/esm/index.mjs",
+      "require": "./lib/cjs/index.js"
+    },
+    "./built-in": {
+      "types": "./lib/types/built-in/index.d.ts",
+      "import": "./lib/esm/built-in/index.mjs",
+      "require": "./lib/cjs/built-in/index.js"
+    },
+    "./coin": {
+      "types": "./lib/types/coin/index.d.ts",
+      "import": "./lib/esm/coin/index.mjs",
+      "require": "./lib/cjs/coin/index.js"
+    },
+    "./core": {
+      "types": "./lib/types/core/index.d.ts",
+      "import": "./lib/esm/core/index.mjs",
+      "require": "./lib/cjs/core/index.js"
+    },
+    "./nodejs": {
+      "types": "./lib/types/nodejs/index.d.ts",
+      "import": "./lib/esm/nodejs/index.mjs",
+      "require": "./lib/cjs/nodejs/index.js"
+    },
+    "./marmalade": {
+      "types": "./lib/types/marmalade/index.d.ts",
+      "import": "./lib/esm/marmalade/index.mjs",
+      "require": "./lib/cjs/marmalade/index.js"
+    },
+    "./webauthn": {
+      "types": "./lib/types/webauthn/index.d.ts",
+      "import": "./lib/esm/webauthn/index.mjs",
+      "require": "./lib/cjs/webauthn/index.js"
+    },
+    "./faucet": {
+      "types": "./lib/types/faucet/index.d.ts",
+      "import": "./lib/esm/faucet/index.mjs",
+      "require": "./lib/cjs/faucet/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./lib/types/index.d.ts"
+      ],
+      "built-in": [
+        "./lib/types/built-in/index.d.ts"
+      ],
+      "core": [
+        "./lib/types/core/index.d.ts"
+      ],
+      "coin": [
+        "./lib/types/coin/index.d.ts"
+      ],
+      "nodejs": [
+        "./lib/types/nodejs/index.d.ts"
+      ],
+      "marmalade": [
+        "./lib/types/marmalade/index.d.ts"
+      ],
+      "webauthn": [
+        "./lib/types/webauthn/index.d.ts"
+      ],
+      "faucet": [
+        "./lib/types/faucet/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "lib",
+    "built-in",
+    "coin",
+    "core",
+    "src"
+  ],
+  "scripts": {
+    "ae": "pnpm run ae:core && pnpm run ae:built-in && pnpm run ae:coin",
+    "ae:built-in": "api-extractor run --verbose -c ./config/api-extractor-built-in.json",
+    "ae:coin": "api-extractor run --verbose -c ./config/api-extractor-coin.json",
+    "ae:core": "api-extractor run --verbose -c ./config/api-extractor-core.json",
+    "build": "pnpm run pactjs:generate:contract && pnpm run pactjs:generate:faucet && pnpm run generate-pipe-type && tsc && unbuild && pnpm run ae",
+    "dev:ae": "pnpm run dev:ae:core && pnpm run dev:ae:built-in && pnpm run dev:ae:coin",
+    "dev:ae:built-in": "api-extractor run --local --verbose -c ./config/api-extractor-built-in.json",
+    "dev:ae:coin": "api-extractor run --local --verbose -c ./config/api-extractor-coin.json",
+    "dev:ae:core": "api-extractor run --local --verbose -c ./config/api-extractor-core.json",
+    "dev:postinstall": "pnpm run pactjs:generate:contract && pnpm run pactjs:generate:faucet",
+    "faucet:account-details": "TASK=account-details ts-node src/scripts/deploy-faucet/deploy-faucet.ts",
+    "faucet:balance": "TASK=balance ts-node src/scripts/deploy-faucet/deploy-faucet.ts",
+    "faucet:deploy": "TASK=deploy ts-node src/scripts/deploy-faucet/deploy-faucet.ts",
+    "faucet:fund": "TASK=fund ts-node src/scripts/deploy-faucet/deploy-faucet.ts",
+    "faucet:fund-create": "TASK=fund-create ts-node src/scripts/deploy-faucet/deploy-faucet.ts",
+    "faucet:transfer": "TASK=transfer ts-node src/scripts/deploy-faucet/deploy-faucet.ts",
+    "format": "pnpm run /^format:.*/",
+    "format:lint": "pnpm run lint:src --fix",
+    "format:md": "remark README.md -o --use @kadena-dev/markdown",
+    "format:src": "prettier . --cache --write",
+    "generate-pipe-type": "cache-sh -i \"{src/scripts/create-async-pipe-type.ts,src/interfaces/async-pipe-type.ts}\" \"ts-node src/scripts/create-async-pipe-type.ts 30\"",
+    "lint": "pnpm run /^lint:.*/",
+    "lint:fmt": "prettier . --cache --check",
+    "lint:pkg": "lint-package",
+    "lint:src": "eslint src --ext .js,.ts",
+    "pactjs:generate:contract": "cache-sh -i \"node_modules/.kadena/**\" -- \"pactjs contract-generate --contract coin --contract marmalade-v2.ledger --contract marmalade-v2.collection-policy-v1 --contract marmalade-v2.policy-manager --contract marmalade-sale.conventional-auction --contract marmalade-sale.dutch-auction --contract n_eef68e581f767dd66c4d4c39ed922be944ede505.webauthn-wallet --api https://api.chainweb-community.org/chainweb/0.0/mainnet01/chain/8/pact\"",
+    "pactjs:generate:faucet": "cache-sh -i \"node_modules/.kadena/**\" -- \"pactjs contract-generate --namespace n_d8cbb935f9cd9d2399a5886bb08caed71f9bad49 -f ./src/scripts/deploy-faucet/testnet-faucet.pact\"",
+    "test": "vitest run",
+    "test:integration": "pnpm run test:integration:setup && vitest run -c ./vitest.integration.config.ts",
+    "test:integration:local": "vitest run -c ./vitest.integration.config.ts",
+    "test:integration:setup": "pnpm run build && ts-node src/scripts/setup-marmalade-test-env.ts",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@kadena/chainweb-node-client": "workspace:*",
+    "@kadena/client": "workspace:*",
+    "@kadena/cryptography-utils": "workspace:*",
+    "@kadena/pactjs": "workspace:*",
+    "@kadena/pactjs-cli": "workspace:*",
+    "@kadena/types": "workspace:*",
+    "debug": "4.3.4",
+    "dotenv": "~16.4.7",
+    "js-yaml": "~4.1.1",
+    "ramda": "^0.29.1"
+  },
+  "devDependencies": {
+    "@kadena-dev/eslint-config": "workspace:*",
+    "@kadena-dev/lint-package": "workspace:*",
+    "@kadena-dev/markdown": "workspace:*",
+    "@kadena-dev/shared-config": "workspace:*",
+    "@microsoft/api-extractor": "^7.57.7",
+    "@rushstack/eslint-config": "~3.6.10",
+    "@rushstack/heft": "~0.50.7",
+    "@types/debug": "~4.1.13",
+    "@types/js-yaml": "4.0.9",
+    "@types/node": "^22.15.0",
+    "@types/ramda": "^0.29.12",
+    "@vitest/coverage-v8": "^3.2.4",
+    "cache-sh": "^1.3.1",
+    "eslint": "^8.57.1",
+    "prettier": "~3.5.3",
+    "ts-node": "~10.9.2",
+    "typescript": "^5.8.3",
+    "unbuild": "^2.0.0",
+    "vitest": "^3.2.4"
+  }
+}

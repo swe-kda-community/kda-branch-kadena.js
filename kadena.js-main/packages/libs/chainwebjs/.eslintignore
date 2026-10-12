@@ -1,5 +1,0 @@
-!.*.js
-**/dist/**
-**/coverage/**
-**/tests/**
-**/tests/**/mocks/**

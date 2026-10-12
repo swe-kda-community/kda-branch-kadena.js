@@ -1,1 +1,0 @@
-export { KadenaLogo } from './KadenaLogo';

@@ -1,3 +1,0 @@
-# Chainweb EVM Monitoring Dashboard
-
-

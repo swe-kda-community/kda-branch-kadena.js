@@ -1,7 +1,0 @@
-{
-  "extends": "./node_modules/@kadena-dev/shared-config/tsconfig-base.json",
-  "compilerOptions": {
-    "types": ["jest"],
-    "lib": ["es2019"]
-  }
-}

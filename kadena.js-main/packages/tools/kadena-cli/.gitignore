@@ -1,9 +1,0 @@
-### KDACLI - IGNNORE ###
-
-#launch.json folder
-.vscode/
-#Kadena
-.kadena/
-
-
-!/vitest.setup.js

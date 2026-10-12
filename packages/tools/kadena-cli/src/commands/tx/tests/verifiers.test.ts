@@ -74,7 +74,7 @@ describe('tx add', () => {
             network: 'testnet',
             networkId: 'testnet06',
             networkHost: 'https://api.testnet.chainweb-community.org',
-            networkExplorerUrl: ' https://explorer.chainweb.com/testnet/tx/',
+            networkExplorerUrl: ' https://explorer.chainweb-community.org/testnet/tx/',
           },
         },
       ],

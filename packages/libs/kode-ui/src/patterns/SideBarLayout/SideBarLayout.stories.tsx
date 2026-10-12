@@ -166,14 +166,14 @@ const InnerLayout = () => {
                   <SideBarTreeItem label="Accounts" href="https://kadena.io" />
                   <SideBarTreeItem
                     label="Assets"
-                    href="https://docs.kadena.io"
+                    href="https://kda-chain.org/docs"
                   />
                 </SideBarTree>
                 <SideBarTree visual={<MonoWallet />} label="My Wallet 2">
                   <SideBarTreeItem label="Accounts" href="https://kadena.io" />
                   <SideBarTreeItem
                     label="Assets"
-                    href="https://docs.kadena.io"
+                    href="https://kda-chain.org/docs"
                   />
                 </SideBarTree>
               </>
@@ -511,7 +511,7 @@ const NotificationsLayout = () => {
                   label: 'This is an info Notification',
                   message: 'And this is the info message',
                   isDismissable: true,
-                  url: 'https://explorer.kadena.io',
+                  url: 'https://explorer.chainweb-community.org',
                 });
               }}
             >

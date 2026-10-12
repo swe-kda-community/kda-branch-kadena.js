@@ -83,8 +83,8 @@ export const GraphQLQueryDialog = (): React.JSX.Element => {
 
             <Text>
               Documentation and more information can be found at{' '}
-              <a href="https://docs.kadena.io/build/frontend/kadena-graph">
-                docs.kadena.io
+              <a href="https://kda-chain.org/docs/build/frontend/kadena-graph">
+                kda-chain.org/docs
               </a>
             </Text>
 

@@ -29,17 +29,6 @@ describe('Host Generators', () => {
       expect(result).toBe(expectedUrl);
     });
 
-    it('should generate the correct Chainweb URL for testnet05 and chainId 3', () => {
-      const networkId = 'testnet05';
-      const chainId = '3';
-      const expectedUrl =
-        'https://api.testnet.chainweb-community.org/chainweb/0.0/testnet05/chain/3/pact';
-
-      const result = defaultChainwebHostGenerator({ networkId, chainId });
-
-      expect(result).toBe(expectedUrl);
-    });
-
     it('should generate a URL with "undefined" for unsupported networkId', () => {
       const networkId = 'unknownNetwork';
       const chainId = '1';
@@ -78,16 +67,6 @@ describe('Host Generators', () => {
 
     it('should generate the correct GraphQL URL for testnet06', () => {
       const networkId = 'testnet06';
-      const expectedUrl = 'https://graph.testnet.kadena.network/graphql';
-
-      const result = defaultGraphqlHostGenerator({ networkId });
-
-      expect(result).toBe(expectedUrl);
-      expect(consoleWarnSpy).not.toHaveBeenCalled();
-    });
-
-    it('should generate the correct GraphQL URL for testnet05', () => {
-      const networkId = 'testnet05';
       const expectedUrl = 'https://graph.testnet.kadena.network/graphql';
 
       const result = defaultGraphqlHostGenerator({ networkId });

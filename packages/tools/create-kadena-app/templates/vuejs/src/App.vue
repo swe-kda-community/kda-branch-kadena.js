@@ -111,7 +111,7 @@ export default {
           <h4 class="cardTitle">Resources</h4>
           <ul class="list">
             <li>
-              <a href="https://docs.kadena.io/" class="link"
+              <a href="https://kda-chain.org/docs/" class="link"
                 >Find in-depth information about Kadena. &rarr;</a
               >
             </li>

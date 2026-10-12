@@ -84,9 +84,6 @@ export const Header: React.FC = () => {
           <SelectItem key="testnet06" textValue="Testnet">
             Testnet
           </SelectItem>
-          <SelectItem key="testnet05" textValue="Testnet Pact5">
-            Testnet (Pact 5)
-          </SelectItem>
         </NavHeaderSelect>
       </Tooltip>
       <Tooltip text="Switch between light and dark themes.">

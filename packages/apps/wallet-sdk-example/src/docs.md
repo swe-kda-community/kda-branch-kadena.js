@@ -780,7 +780,7 @@ documentation, explore the features, and start building today!
 ## Additional Resources
 
 - [Kadena Official Website](https://kadena.io/)
-- [Kadena Documentation](https://docs.kadena.io/)
+- [Kadena Documentation](https://kda-chain.org/docs/)
 - [Kadena GitHub Repository](https://github.com/kadena-io/)
 
 ---

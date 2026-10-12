@@ -43,8 +43,7 @@ interface ICompletedBlockHeightsResponse {
 const testnet06Props: INETWORK = {
   key: 'testnet06',
   label: 'Chainweb testnet',
-  chainweb:
-    'https://ap1.testnet.chainweb-community.org/chainweb/0.0/testnet06/cut',
+  chainweb: 'https://api.testnet.chainweb-community.org/chainweb/0.0/testnet06/cut',
   url: 'https://graph.testnet.kadena.network/graphql',
   graphqlRef:
     'https://graph.testnet.kadena.network/graphql?query=query+graphBlockHeight+%7B%0A++++++++completedBlockHeights%28heightCount%3A+1%29+%7B%0A++++++++++edges+%7B%0A++++++++++++node+%7B%0A++++++++++++++height%0A++++++++++++%7D%0A++++++++++%7D%0A++++++++%7D%0A++++++%7D',

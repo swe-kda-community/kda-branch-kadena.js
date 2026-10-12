@@ -38,7 +38,7 @@ export type ICapabilityItem = ICap;
 /**
  * @public
  */
-export type SignerScheme = 'ED25519' | 'ETH' | 'WebAuthn';
+export type SignerScheme = 'ED25519' | 'ETH' | 'WebAuthn' | 'SLH-DSA-SHA2-128s' | 'SLH-DSA-SHA2-192s' | 'SLH-DSA-SHA2-256s';
 
 // TODO: update filed types based on @Kadena/types
 /**

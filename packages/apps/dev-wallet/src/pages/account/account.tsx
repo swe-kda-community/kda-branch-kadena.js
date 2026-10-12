@@ -130,7 +130,7 @@ export function AccountPage() {
 
   const explorerLink =
     account.chains.length > 0
-      ? `https://explorer.kadena.io/account/${account.address}?networkId=${activeNetwork?.networkId}`
+      ? `https://explorer.chainweb-community.org/account/${account.address}?networkId=${activeNetwork?.networkId}`
       : '';
 
   return (

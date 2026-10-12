@@ -2,7 +2,7 @@ import type { INetworkCreateOptions } from '../commands/networks/utils/networkHe
 
 export const testNetworkConfigMock: INetworkCreateOptions = {
   networkHost: 'https://api.testnet.chainweb-community.org',
-  networkExplorerUrl: 'https://explorer.chainweb.com/testnet06',
+  networkExplorerUrl: 'https://explorer.chainweb-community.org/testnet06',
   networkId: 'testnet06',
   network: 'testnet',
 };

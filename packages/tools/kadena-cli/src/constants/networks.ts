@@ -14,13 +14,13 @@ export const networkDefaults: IDefaultNetworkOptions = {
     network: 'mainnet',
     networkId: 'mainnet01',
     networkHost: 'https://api.chainweb-community.org',
-    networkExplorerUrl: 'https://explorer.chainweb.com/mainnet/tx/',
+    networkExplorerUrl: 'https://explorer.chainweb-community.org/mainnet/tx/',
   },
   testnet: {
     network: 'testnet',
     networkId: 'testnet06',
     networkHost: 'https://api.testnet.chainweb-community.org',
-    networkExplorerUrl: 'https://explorer.chainweb.com/testnet/tx/',
+    networkExplorerUrl: 'https://explorer.chainweb-community.org/testnet/tx/',
   },
   devnet: {
     network: 'devnet',

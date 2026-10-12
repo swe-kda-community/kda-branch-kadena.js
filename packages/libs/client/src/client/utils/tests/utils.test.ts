@@ -57,9 +57,7 @@ describe('client utils', () => {
     it('returns mainnet url with the correct chainId', () => {
       expect(
         kadenaHostGenerator({ networkId: 'mainnet01', chainId: '14' }),
-      ).toBe(
-        'https://api.chainweb-community.org/chainweb/0.0/mainnet01/chain/14/pact',
-      );
+      ).toBe('https://api.chainweb-community.org/chainweb/0.0/mainnet01/chain/14/pact');
     });
 
     it('returns testnet url with the correct chainId', () => {
@@ -67,11 +65,6 @@ describe('client utils', () => {
         kadenaHostGenerator({ networkId: 'testnet06', chainId: '14' }),
       ).toBe(
         'https://api.testnet.chainweb-community.org/chainweb/0.0/testnet06/chain/14/pact',
-      );
-      expect(
-        kadenaHostGenerator({ networkId: 'testnet05', chainId: '14' }),
-      ).toBe(
-        'https://api.testnet05.chainweb.com/chainweb/0.0/testnet05/chain/14/pact',
       );
     });
 

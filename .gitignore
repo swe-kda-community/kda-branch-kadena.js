@@ -104,3 +104,7 @@ temp
 
 # parcel
 .parcel-cache
+
+# apptui self-contained binary (written by apptui init)
+/tui
+/tui.exe

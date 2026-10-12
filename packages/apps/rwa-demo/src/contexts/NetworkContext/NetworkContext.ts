@@ -25,18 +25,11 @@ export const defaultNetworkContext: INetworkContext = {
   },
   networks: [
     {
-      networkId: 'testnet05',
-      name: 'Testnet(Pact5)',
-      host: 'https://api.testnet05.chainweb.com',
-      chainId: '0',
-      graphUrl: 'https://graph.testnet05.kadena.network/graphql',
-    },
-    {
       networkId: 'testnet06',
       name: 'Testnet',
       host: 'https://api.testnet.chainweb-community.org',
-      graphUrl: 'https://graph.testnet.kadena.network/graphql',
       chainId: '0',
+      graphUrl: 'https://graph.testnet.kadena.network/graphql',
     },
     {
       networkId: 'development',

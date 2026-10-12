@@ -97,7 +97,7 @@ describe('account fund', () => {
       'Account "accountName" funded with 20 coin(s) on Chain ID(s) "1" in testnet06 network.',
     );
     expect(res.stderr).toContain(
-      'https://explorer.chainweb.com/testnet/tx/requestKey-1',
+      'https://explorer.chainweb-community.org/testnet/tx/requestKey-1',
     );
   });
 
@@ -109,7 +109,7 @@ describe('account fund', () => {
       'Account "accountName" funded with 1 coin(s) on Chain ID(s) "1" in testnet06 network.',
     );
     expect(res.stderr).toContain(
-      'https://explorer.chainweb.com/testnet/tx/requestKey-1',
+      'https://explorer.chainweb-community.org/testnet/tx/requestKey-1',
     );
   });
 

@@ -63,7 +63,7 @@ export const networkOptions = {
     validation: z.string().optional(),
     option: new Option(
       '-e, --network-explorer-url <networkExplorerUrl>',
-      'Kadena network explorer URL (e.g. "https://explorer.chainweb.com/mainnet/tx/")',
+      'Kadena network explorer URL (e.g. "https://explorer.chainweb-community.org/mainnet/tx/")',
     ),
   }),
   networkOverwrite: createOption({

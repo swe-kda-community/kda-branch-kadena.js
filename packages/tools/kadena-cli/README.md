@@ -40,6 +40,6 @@ npm install -g @kadena/kadena-cli
 pnpm install -g @kadena/kadena-cli
 ```
 
-Read more at [docs.kadena.io][1]
+Read more at [kda-chain.org/docs][1]
 
-[1]: https://docs.kadena.io/reference/kadena-cli-ref
+[1]: https://kda-chain.org/docs/reference/kadena-cli-ref

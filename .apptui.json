@@ -1,0 +1,400 @@
+{
+  "title": "kadena.js — kda-community monorepo",
+  "model": "claude-opus-4",
+  "version": "v1.0.0",
+  "workspace": ".",
+  "backend": {
+    "type": "websocket",
+    "url": "ws://localhost:4242/tui",
+    "reconnect_ms": 2000
+  },
+  "section_order": ["Run", "Build", "Test", "AI Tools", "Kadena CLI", "Workspace", "Git", "App"],
+  "commands": {
+    "Run": [
+      {
+        "name": "dev-wallet",
+        "desc": "Start Kadena dev wallet (Vite)",
+        "shortcut": "pnpm --filter @kadena/dev-wallet dev",
+        "action": "run",
+        "subsection": "Apps"
+      },
+      {
+        "name": "explorer",
+        "desc": "Start block explorer (Next.js)",
+        "shortcut": "pnpm --filter @kadena/explorer dev",
+        "action": "run",
+        "subsection": "Apps"
+      },
+      {
+        "name": "graph",
+        "desc": "Start GraphQL API server",
+        "shortcut": "pnpm --filter @kadena/graph dev",
+        "action": "run",
+        "subsection": "Apps"
+      },
+      {
+        "name": "tools",
+        "desc": "Start tools web app (Next.js)",
+        "shortcut": "pnpm --filter @kadena/tools dev",
+        "action": "run",
+        "subsection": "Apps"
+      },
+      {
+        "name": "rwa-demo",
+        "desc": "Start RWA demo app",
+        "shortcut": "pnpm --filter @kadena/rwa-demo dev",
+        "action": "run",
+        "subsection": "Apps"
+      },
+      {
+        "name": "proof-of-us",
+        "desc": "Start Proof of Us app",
+        "shortcut": "pnpm --filter @kadena/proof-of-us dev",
+        "action": "run",
+        "subsection": "Apps"
+      },
+      {
+        "name": "chainweb-evm-dashboard",
+        "desc": "Start EVM dashboard",
+        "shortcut": "pnpm --filter @kadena/chainweb-evm-dashboard dev",
+        "action": "run",
+        "subsection": "Apps"
+      },
+      {
+        "name": "kode-ui storybook",
+        "desc": "Start Kode UI storybook",
+        "shortcut": "pnpm --filter @kadena/kode-ui storybook",
+        "action": "run",
+        "subsection": "Libs"
+      }
+    ],
+    "Build": [
+      {
+        "name": "build all",
+        "desc": "Build all packages via turbo",
+        "shortcut": "pnpm build",
+        "action": "run",
+        "subsection": "Workspace"
+      },
+      {
+        "name": "build libs",
+        "desc": "Build all lib packages",
+        "shortcut": "pnpm --filter \"./packages/libs/**\" build",
+        "action": "run",
+        "subsection": "Workspace"
+      },
+      {
+        "name": "build tools",
+        "desc": "Build all tool packages",
+        "shortcut": "pnpm --filter \"./packages/tools/**\" build",
+        "action": "run",
+        "subsection": "Workspace"
+      },
+      {
+        "name": "build mcp-server",
+        "desc": "Build the Kadena MCP server",
+        "shortcut": "pnpm --filter @kadena/mcp-server build",
+        "action": "run",
+        "subsection": "AI Tools"
+      },
+      {
+        "name": "build ai-tools",
+        "desc": "Build the AI tools library",
+        "shortcut": "pnpm --filter @kadena/ai-tools build",
+        "action": "run",
+        "subsection": "AI Tools"
+      },
+      {
+        "name": "build agent-skills",
+        "desc": "Build the agent skills library",
+        "shortcut": "pnpm --filter @kadena/agent-skills build",
+        "action": "run",
+        "subsection": "AI Tools"
+      },
+      {
+        "name": "build kadena-cli",
+        "desc": "Build the Kadena CLI",
+        "shortcut": "pnpm --filter @kadena/kadena-cli build",
+        "action": "run",
+        "subsection": "CLI"
+      },
+      {
+        "name": "build client",
+        "desc": "Build @kadena/client",
+        "shortcut": "pnpm --filter @kadena/client build",
+        "action": "run",
+        "subsection": "Libs"
+      },
+      {
+        "name": "build e2e",
+        "desc": "Build e2e test apps via turbo",
+        "shortcut": "pnpm build:e2e",
+        "action": "run",
+        "subsection": "Workspace"
+      }
+    ],
+    "Test": [
+      {
+        "name": "test all",
+        "desc": "Run all unit tests via turbo",
+        "shortcut": "pnpm test",
+        "action": "run",
+        "subsection": "Suite"
+      },
+      {
+        "name": "test integration",
+        "desc": "Run integration tests via turbo",
+        "shortcut": "pnpm test:integration",
+        "action": "run",
+        "subsection": "Suite"
+      },
+      {
+        "name": "test e2e",
+        "desc": "Run all Playwright e2e tests",
+        "shortcut": "pnpm test:e2e",
+        "action": "run",
+        "subsection": "Suite"
+      },
+      {
+        "name": "test mcp-server",
+        "desc": "Test the MCP server",
+        "shortcut": "pnpm --filter @kadena/mcp-server test",
+        "action": "run",
+        "subsection": "AI Tools"
+      },
+      {
+        "name": "test ai-tools",
+        "desc": "Test the AI tools library",
+        "shortcut": "pnpm --filter @kadena/ai-tools test",
+        "action": "run",
+        "subsection": "AI Tools"
+      },
+      {
+        "name": "test agent-skills",
+        "desc": "Test the agent skills library",
+        "shortcut": "pnpm --filter @kadena/agent-skills test",
+        "action": "run",
+        "subsection": "AI Tools"
+      },
+      {
+        "name": "test kadena-cli",
+        "desc": "Test the Kadena CLI",
+        "shortcut": "pnpm --filter @kadena/kadena-cli test",
+        "action": "run",
+        "subsection": "CLI"
+      },
+      {
+        "name": "test client",
+        "desc": "Test @kadena/client",
+        "shortcut": "pnpm --filter @kadena/client test",
+        "action": "run",
+        "subsection": "Libs"
+      },
+      {
+        "name": "test explorer",
+        "desc": "Test the block explorer",
+        "shortcut": "pnpm --filter @kadena/explorer test",
+        "action": "run",
+        "subsection": "Apps"
+      },
+      {
+        "name": "test graph",
+        "desc": "Test the GraphQL API server",
+        "shortcut": "pnpm --filter @kadena/graph test",
+        "action": "run",
+        "subsection": "Apps"
+      }
+    ],
+    "AI Tools": [
+      {
+        "name": "start MCP server",
+        "desc": "Run the Kadena MCP server (stdio transport)",
+        "shortcut": "node packages/tools/mcp-server/dist/server.js",
+        "action": "run",
+        "subsection": "MCP"
+      },
+      {
+        "name": "watch MCP server",
+        "desc": "Run MCP server with --watch (auto-reload on changes)",
+        "shortcut": "pnpm --filter @kadena/mcp-server dev",
+        "action": "run",
+        "subsection": "MCP"
+      },
+      {
+        "name": "build all AI",
+        "desc": "Build mcp-server, ai-tools and agent-skills together",
+        "shortcut": "pnpm --filter @kadena/mcp-server --filter @kadena/ai-tools --filter @kadena/agent-skills build",
+        "action": "run",
+        "subsection": "MCP"
+      },
+      {
+        "name": "test all AI",
+        "desc": "Test mcp-server, ai-tools and agent-skills together",
+        "shortcut": "pnpm --filter @kadena/mcp-server --filter @kadena/ai-tools --filter @kadena/agent-skills test",
+        "action": "run",
+        "subsection": "MCP"
+      }
+    ],
+    "Kadena CLI": [
+      {
+        "name": "kadena",
+        "desc": "Run the Kadena CLI (built)",
+        "shortcut": "pnpm --filter @kadena/kadena-cli start",
+        "action": "run",
+        "subsection": "Run"
+      },
+      {
+        "name": "create kadena app",
+        "desc": "Scaffold a new Kadena project",
+        "shortcut": "pnpm --filter @kadena/create-kadena-app start",
+        "action": "run",
+        "subsection": "Run"
+      },
+      {
+        "name": "pactjs-cli",
+        "desc": "Run the Pact JS CLI",
+        "shortcut": "pnpm --filter @kadena/pactjs-cli start",
+        "action": "run",
+        "subsection": "Pact"
+      }
+    ],
+    "Workspace": [
+      {
+        "name": "pnpm install",
+        "desc": "Install all dependencies",
+        "shortcut": "pnpm install",
+        "action": "run",
+        "subsection": "Dependencies"
+      },
+      {
+        "name": "lint dependencies",
+        "desc": "Check dependency version mismatches (syncpack)",
+        "shortcut": "pnpm run lint:dependencies",
+        "action": "run",
+        "subsection": "Quality"
+      },
+      {
+        "name": "lint",
+        "desc": "Run all lint checks",
+        "shortcut": "pnpm run lint",
+        "action": "run",
+        "subsection": "Quality"
+      },
+      {
+        "name": "format",
+        "desc": "Format all source files (prettier)",
+        "shortcut": "pnpm run format",
+        "action": "run",
+        "subsection": "Quality"
+      },
+      {
+        "name": "format src",
+        "desc": "Format root-level source files only",
+        "shortcut": "pnpm run format:src",
+        "action": "run",
+        "subsection": "Quality"
+      },
+      {
+        "name": "knip",
+        "desc": "Find unused exports / files",
+        "shortcut": "pnpm knip",
+        "action": "run",
+        "subsection": "Quality"
+      },
+      {
+        "name": "changeset",
+        "desc": "Create a new changeset",
+        "shortcut": "pnpm changeset",
+        "action": "run",
+        "subsection": "Release"
+      },
+      {
+        "name": "changeset version",
+        "desc": "Bump versions from changesets",
+        "shortcut": "pnpm version",
+        "action": "run",
+        "subsection": "Release"
+      },
+      {
+        "name": "publish",
+        "desc": "Publish packages to npm",
+        "shortcut": "pnpm publish",
+        "action": "run",
+        "subsection": "Release"
+      },
+      {
+        "name": "update packages.json",
+        "desc": "Re-generate packages.json registry",
+        "shortcut": "pnpm run format:pkgs",
+        "action": "run",
+        "subsection": "Release"
+      }
+    ],
+    "Git": [
+      {
+        "name": "git status",
+        "desc": "Show working tree status",
+        "shortcut": "git status",
+        "action": "run"
+      },
+      {
+        "name": "git log",
+        "desc": "Show recent 20 commits",
+        "shortcut": "git log --oneline -20",
+        "action": "run"
+      },
+      {
+        "name": "git diff",
+        "desc": "Show unstaged changes",
+        "shortcut": "git diff",
+        "action": "run"
+      },
+      {
+        "name": "git push",
+        "desc": "Push current branch to remote",
+        "shortcut": "git push",
+        "action": "run"
+      }
+    ],
+    "App": [
+      {
+        "name": "Settings",
+        "desc": "Configure auto-accept, LaTeX formatting"
+      },
+      {
+        "name": "Theme",
+        "desc": "Switch between dark and light colour scheme"
+      },
+      {
+        "name": "Shortcuts",
+        "desc": "View keyboard shortcuts",
+        "shortcut": "?"
+      },
+      {
+        "name": "Show/Hide Sidebar",
+        "desc": "Toggle the sidebar panel",
+        "shortcut": "ctrl+/"
+      }
+    ]
+  },
+  "settings": {
+    "theme": "dark",
+    "colors": {},
+    "layout": {
+      "sidebar_width_pct": 38,
+      "show_activity_graph": true,
+      "show_todo_list": true,
+      "show_terminals": true,
+      "show_lsp": true,
+      "show_token_stats": true,
+      "show_changes": true,
+      "compact_header": false
+    },
+    "chrome": {
+      "border_style": "rounded",
+      "icon_set": "unicode",
+      "graph_density": "full",
+      "input_prompt": "› "
+    }
+  }
+}

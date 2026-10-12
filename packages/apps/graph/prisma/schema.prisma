@@ -178,5 +178,5 @@ view reconcile {
   eventId                Int?     @map("id")
   version                String?
 
-  @@id([blockHash, orderIndex, requestKey])
+  @@unique([blockHash, orderIndex, requestKey])
 }

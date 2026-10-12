@@ -124,13 +124,13 @@ users.
 
 This readme doesn't aim to be a tutorial for Pact therefore we aren't going into
 the complete details of the contract nor the Pact language. For more detailed
-info on Pact development visit the **Build** section on [docs.kadena.io][7].
+info on Pact development visit the **Build** section on [kda-chain.org/docs][7].
 
 [1]: ##The-Pact-smart-contract
-[2]: https://docs.kadena.io/basics/chainweaver/chainweaver-user-guide
+[2]: https://kda-chain.org/docs/basics/chainweaver/chainweaver-user-guide
 [3]: https://nextjs.org/
 [4]: https://vuejs.org/
 [5]: https://angular.io/
 [6]:
   https://github.com/kadena-community/kadena.js/tree/main/packages/tools/create-kadena-app/pact
-[7]: https://docs.kadena.io/
+[7]: https://kda-chain.org/docs/

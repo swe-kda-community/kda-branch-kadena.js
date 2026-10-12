@@ -43,7 +43,7 @@ export const AttendanceShare: FC<IProps> = ({ tokenId, data, metadataUri }) => {
               <MetaTerm>block explorer</MetaTerm>
               <MetaDetails>
                 <a
-                  href={`https://explorer.chainweb.com/${env.NETWORKNAME}/eventsearch?q=${tokenId}`}
+                  href={`https://explorer.chainweb-community.org/${env.NETWORKNAME}/eventsearch?q=${tokenId}`}
                   target="_blank"
                 >
                   click here

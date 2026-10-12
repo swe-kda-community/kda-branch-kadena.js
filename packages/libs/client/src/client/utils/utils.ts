@@ -58,17 +58,9 @@ export const kadenaHostGenerator = ({
 }: INetworkOptions): string => {
   switch (networkId) {
     case 'mainnet01':
-      return getHostUrl('https://api.chainweb-community.org')({
-        networkId,
-        chainId,
-      });
+      return getHostUrl('https://api.chainweb-community.org')({ networkId, chainId });
     case 'testnet06':
       return getHostUrl('https://api.testnet.chainweb-community.org')({
-        networkId,
-        chainId,
-      });
-    case 'testnet05':
-      return getHostUrl('https://api.testnet05.chainweb.com')({
         networkId,
         chainId,
       });

@@ -1,0 +1,217 @@
+;;
+;; koreid.repl — Pact REPL tests
+;; Run with: pact koreid.repl
+;;
+
+(begin-tx "Setup namespaces and keysets")
+
+;; Admin keyset — governs the module
+(env-data {
+  "free.koreid-admin": { "keys": ["admin-key-1"], "pred": "keys-all" },
+  "free.koreid-oracle": { "keys": ["oracle-key-1", "oracle-key-2"], "pred": "keys-any" }
+})
+(env-keys ["admin-key-1"])
+(define-keyset "free.koreid-admin" (read-keyset "free.koreid-admin"))
+(define-keyset "free.koreid-oracle" (read-keyset "free.koreid-oracle"))
+
+;; Mock util.guards (deployed on real chain)
+(module util.guards AUTONOMOUS
+  (defcap AUTONOMOUS () (enforce false "non-upgradeable"))
+  (defun guard-and:guard (a:guard b:guard)
+    (create-user-guard (enforce-and a b)))
+  (defun enforce-and:bool (a:guard b:guard)
+    (enforce-guard a)
+    (enforce-guard b))
+  (defun chain-time:time ()
+    (at 'block-time (chain-data)))
+)
+
+;; Mock coin.details for test accounts
+(module coin GOVERNANCE
+  (defcap GOVERNANCE () true)
+  (defun details:object (account:string)
+    (if (= account "k:alice-pubkey")
+      { 'guard: (read-keyset "alice-keyset"), 'balance: 100.0, 'account: account }
+      (if (= account "k:bob-pubkey")
+        { 'guard: (read-keyset "bob-keyset"), 'balance: 50.0, 'account: account }
+        (error "Account not found")
+      )
+    )
+  )
+)
+
+(commit-tx)
+
+;; ---------------------------------------------------------------------------
+(begin-tx "Load koreid module")
+(load "koreid.pact")
+(commit-tx)
+
+;; ---------------------------------------------------------------------------
+(begin-tx "Register an oracle")
+(env-keys ["admin-key-1"])
+(expect "Register oracle succeeds"
+  "Write succeeded"
+  (free.koreid.koreid-register-oracle "oracle-1" "Acme KYC Provider"))
+(commit-tx)
+
+;; ---------------------------------------------------------------------------
+(begin-tx "Oracle adds pending attestation for alice")
+(env-keys ["oracle-key-1"])
+(env-data { "alice-keyset": { "keys": ["alice-pubkey"], "pred": "keys-all" } })
+(env-chain-data { "block-time": (time "2026-01-01T00:00:00Z"), "sender": "oracle-key-1" })
+
+(expect "Add attestation succeeds"
+  "Pending attestation written for k:alice-pubkey:standard"
+  (free.koreid.koreid-attest
+    "k:alice-pubkey"
+    "standard"
+    "abc123def456proof-hash-of-passport-scan"
+    90.0  ; 90 days
+  )
+)
+
+;; Record is pending (not active yet)
+(expect "is-kyc-active is false before accept"
+  false
+  (free.koreid.is-koreid-active "k:alice-pubkey" "standard"))
+(commit-tx)
+
+;; ---------------------------------------------------------------------------
+(begin-tx "Alice accepts with her SpireKey (biometric sign)")
+(env-data {
+  "alice-keyset": { "keys": ["alice-pubkey"], "pred": "keys-all" }
+})
+;; Alice signs with her WebAuthn key — in real usage this is her passkey/biometric
+(env-keys ["alice-pubkey"])
+(env-chain-data { "block-time": (time "2026-01-01T01:00:00Z") })
+
+(expect "Accept attestation succeeds"
+  "KYC (standard) accepted and active for k:alice-pubkey"
+  (free.koreid.koreid-accept "k:alice-pubkey" "standard"))
+
+(expect "is-kyc-active is true after accept"
+  true
+  (free.koreid.is-koreid-active "k:alice-pubkey" "standard"))
+(commit-tx)
+
+;; ---------------------------------------------------------------------------
+(begin-tx "KYC_ACTIVE capability works")
+(env-chain-data { "block-time": (time "2026-02-01T00:00:00Z") })
+;; No signing needed — just reading the capability
+(test-capability (free.koreid.KOREID_ACTIVE "k:alice-pubkey" "standard"))
+(expect "KYC_ACTIVE passes within expiry" true true)
+(commit-tx)
+
+;; ---------------------------------------------------------------------------
+(begin-tx "Unverified user cannot use kyc-guard")
+(env-chain-data { "block-time": (time "2026-02-01T00:00:00Z") })
+(expect-failure "KYC_ACTIVE fails for non-attested user"
+  "No active KYC"
+  (test-capability (free.koreid.KOREID_ACTIVE "k:bob-pubkey" "standard")))
+(commit-tx)
+
+;; ---------------------------------------------------------------------------
+(begin-tx "Oracle revocation")
+(env-keys ["oracle-key-2"])  ; any oracle key works (keys-any)
+(expect "Revoke succeeds"
+  "Attestation k:alice-pubkey:standard revoked"
+  (free.koreid.koreid-revoke "k:alice-pubkey" "standard"))
+
+(expect "is-kyc-active is false after revocation"
+  false
+  (free.koreid.is-koreid-active "k:alice-pubkey" "standard"))
+(commit-tx)
+
+;; ---------------------------------------------------------------------------
+(begin-tx "Cannot double-accept")
+(env-keys ["oracle-key-1"])
+(env-chain-data { "block-time": (time "2026-01-15T00:00:00Z"), "sender": "oracle-key-1" })
+;; Re-add after revocation
+(free.koreid.koreid-attest "k:alice-pubkey" "standard" "new-proof-hash" 30.0)
+(commit-tx)
+
+(begin-tx "Accept once")
+(env-data { "alice-keyset": { "keys": ["alice-pubkey"], "pred": "keys-all" } })
+(env-keys ["alice-pubkey"])
+(env-chain-data { "block-time": (time "2026-01-15T01:00:00Z") })
+(free.koreid.koreid-accept "k:alice-pubkey" "standard")
+(commit-tx)
+
+(begin-tx "Cannot accept already-active attestation")
+(env-data { "alice-keyset": { "keys": ["alice-pubkey"], "pred": "keys-all" } })
+(env-keys ["alice-pubkey"])
+(expect-failure "Double-accept fails"
+  "Attestation already active"
+  (free.koreid.koreid-accept "k:alice-pubkey" "standard"))
+(commit-tx)
+
+(print "All koreid tests passed!")
+
+;; ── Expiry / Renewal tests ──────────────────────────────────────────────────
+
+(begin-tx "p14 — active status")
+(env-chain-data { "block-time": (time "2026-01-16T00:00:00Z") })
+(let ((s (free.vx9k.p14 "k:alice-pubkey" "standard")))
+  (expect "status active"       "active" (at 'status s))
+  (expect "needs-renewal false" false    (at 'needs-renewal s))
+  (expect "seconds-left > 0"   true     (> (at 'seconds-left s) 0.0)))
+(commit-tx)
+
+(begin-tx "Attest short 15-day window for expiry tests")
+(env-keys ["oracle-key-1"])
+(env-chain-data { "block-time": (time "2026-01-16T00:00:00Z"), "sender": "oracle-key-1" })
+(free.vx9k.p1 "k:alice-pubkey" "enhanced" "short-hash" 15.0)
+(commit-tx)
+
+(begin-tx "Alice accepts short attestation")
+(env-data { "alice-keyset": { "keys": ["alice-pubkey"], "pred": "keys-all" } })
+(env-keys ["alice-pubkey"])
+(env-chain-data { "block-time": (time "2026-01-16T01:00:00Z") })
+(free.vx9k.p2 "k:alice-pubkey" "enhanced")
+(commit-tx)
+
+(begin-tx "p14 — expiring-soon (< 30 days)")
+(env-chain-data { "block-time": (time "2026-01-30T00:00:00Z") })
+(let ((s (free.vx9k.p14 "k:alice-pubkey" "enhanced")))
+  (expect "status expiring-soon" "expiring-soon" (at 'status s))
+  (expect "needs-renewal true"   true             (at 'needs-renewal s)))
+(commit-tx)
+
+(begin-tx "p14 — expired")
+(env-chain-data { "block-time": (time "2026-02-05T00:00:00Z") })
+(let ((s (free.vx9k.p14 "k:alice-pubkey" "enhanced")))
+  (expect "status expired"        "expired" (at 'status s))
+  (expect "seconds-left negative" true      (< (at 'seconds-left s) 0.0)))
+(commit-tx)
+
+(begin-tx "p12 — oracle renews, record goes pending again")
+(env-keys ["oracle-key-1"])
+(env-chain-data { "block-time": (time "2026-02-05T01:00:00Z"), "sender": "oracle-key-1" })
+(expect "Renewal writes pending record" true
+  (free.vx9k.p12 "k:alice-pubkey" "enhanced" "renewed-hash" 90.0))
+(commit-tx)
+
+(begin-tx "p14 — expired until re-accepted")
+(env-chain-data { "block-time": (time "2026-02-05T02:00:00Z") })
+(let ((s (free.vx9k.p14 "k:alice-pubkey" "enhanced")))
+  (expect "still expired until biometric re-accept" "expired" (at 'status s)))
+(commit-tx)
+
+(begin-tx "User re-accepts with biometric after renewal")
+(env-data { "alice-keyset": { "keys": ["alice-pubkey"], "pred": "keys-all" } })
+(env-keys ["alice-pubkey"])
+(env-chain-data { "block-time": (time "2026-02-05T03:00:00Z") })
+(free.vx9k.p2 "k:alice-pubkey" "enhanced")
+(commit-tx)
+
+(begin-tx "p14 — active again, p13 seconds positive")
+(env-chain-data { "block-time": (time "2026-02-06T00:00:00Z") })
+(let ((s    (free.vx9k.p14 "k:alice-pubkey" "enhanced"))
+      (secs (free.vx9k.p13 "k:alice-pubkey" "enhanced")))
+  (expect "active after renewal"  "active" (at 'status s))
+  (expect "needs-renewal false"   false    (at 'needs-renewal s))
+  (expect "seconds-left positive" true     (> secs 0.0)))
+(commit-tx)
+
+(print "All expiry/renewal tests passed!")

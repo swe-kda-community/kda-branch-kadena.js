@@ -35,7 +35,7 @@ export const Footer: FC<PropsWithChildren> = ({ children }) => {
 
       <Stack className={footerContentClass}>
         <a href="https://discord.com/invite/kadena">Discord</a>
-        <a href="https://docs.kadena.io">Help</a>
+        <a href="https://kda-chain.org/docs">Help</a>
         <a href="https://www.kadena.io/privacy-policy">Privacy</a>
         <a href="https://www.kadena.io/terms-and-conditions">Terms</a>
       </Stack>

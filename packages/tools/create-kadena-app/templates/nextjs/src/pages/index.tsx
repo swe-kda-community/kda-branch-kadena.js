@@ -147,7 +147,7 @@ const Home: React.FC = (): React.JSX.Element => {
               <h4 className={styles.cardTitle}>Resources</h4>
               <ul className={styles.list}>
                 <li>
-                  <a className={styles.link} href="https://docs.kadena.io/">
+                  <a className={styles.link} href="https://kda-chain.org/docs/">
                     Find in-depth information about Kadena. &rarr;
                   </a>
                 </li>

@@ -12,7 +12,7 @@ describe('selectnetwork utils', () => {
         chainwebUrl: 'api.chainweb-community.org',
         graphUrl: 'https://graph.kadena.network/graphql',
         wsGraphUrl: 'https://graph.kadena.network/graphql',
-        explorerUrl: 'https://explorer.kadena.io/',
+        explorerUrl: 'https://explorer.chainweb-community.org/',
         isNew: true,
       };
 
@@ -28,7 +28,7 @@ describe('selectnetwork utils', () => {
         chainwebUrl: 'api.chainweb-community.org',
         graphUrl: 'https://graph.kadena.network/graphql',
         wsGraphUrl: 'https://graph.kadena.network/graphql',
-        explorerUrl: 'https://explorer.kadena.io/',
+        explorerUrl: 'https://explorer.chainweb-community.org/',
         isNew: false,
       };
       const result = validateNewNetwork(networkConstants, newNetwork);
@@ -42,7 +42,7 @@ describe('selectnetwork utils', () => {
         chainwebUrl: 'api.chainweb-community.org',
         graphUrl: 'https://graph.kadena.network/graphql',
         wsGraphUrl: 'https://graph.kadena.network/graphql',
-        explorerUrl: 'https://explorer.kadena.io/',
+        explorerUrl: 'https://explorer.chainweb-community.org/',
         isNew: false,
       };
       const result = validateNewNetwork(networkConstants, newNetwork);
@@ -57,7 +57,7 @@ describe('selectnetwork utils', () => {
         chainwebUrl: 'api.chainweb-community.org',
         graphUrl: 'https://graph.kadena.network/graphql',
         wsGraphUrl: 'https://graph.kadena.network/graphql',
-        explorerUrl: 'https://explorer.kadena.io/',
+        explorerUrl: 'https://explorer.chainweb-community.org/',
         isNew: false,
       };
       const result = validateNewNetwork(networkConstants, newNetwork);

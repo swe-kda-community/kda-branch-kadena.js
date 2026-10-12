@@ -1,10 +1,10 @@
 export const MOCK_MAINNET = {
   blockExplorerAddress:
-    'https://explorer.chainweb.com/mainnet/account/[[address]]?token=coin',
+    'https://explorer.chainweb-community.org/mainnet/account/[[address]]?token=coin',
   blockExplorerAddressTransactions:
-    'https://explorer.chainweb.com/mainnet/transfer/[[address]]?token=coin',
+    'https://explorer.chainweb-community.org/mainnet/transfer/[[address]]?token=coin',
   blockExplorerTransaction:
-    'https://explorer.chainweb.com/mainnet/tx/[[txHash]]',
+    'https://explorer.chainweb-community.org/mainnet/tx/[[txHash]]',
   buyPageUrl: 'https://buy.simplex.com/?crypto=KDA',
   isTestnet: false,
   name: 'Kadena Mainnet',
@@ -15,11 +15,11 @@ export const MOCK_MAINNET = {
 };
 export const MOCK_TESTNET = {
   blockExplorerAddress:
-    'https://explorer.chainweb.com/testnet/account/[[address]]?token=coin',
+    'https://explorer.chainweb-community.org/testnet/account/[[address]]?token=coin',
   blockExplorerAddressTransactions:
-    'https://explorer.chainweb.com/testnet/transfer/[[address]]?token=coin',
+    'https://explorer.chainweb-community.org/testnet/transfer/[[address]]?token=coin',
   blockExplorerTransaction:
-    'https://explorer.chainweb.com/testnet/tx/[[txHash]]',
+    'https://explorer.chainweb-community.org/testnet/tx/[[txHash]]',
   buyPageUrl: 'https://faucet.testnet.chainweb.com',
   isTestnet: true,
   name: 'Kadena Testnet',

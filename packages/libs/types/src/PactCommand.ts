@@ -66,12 +66,12 @@ export interface ICap {
  *
  * @alpha
  */
-export type SignerScheme = 'ED25519';
+export type SignerScheme = 'ED25519' | 'SLH-DSA-SHA2-128s' | 'SLH-DSA-SHA2-192s' | 'SLH-DSA-SHA2-256s';
 
 /**
  * Information on the cryptographic signer authenticating a Chainweb transaction.
  *
- * @param scheme - The cryptographic signature scheme used. Defaults to "ED25519". "ETH" is also supported.
+ * @param scheme - The cryptographic signature scheme used. Defaults to "ED25519". "ETH", "WebAuthn", and SLH-DSA post-quantum schemes are also supported.
  * @param pubKey - The Public Key of the signing key pair.
  * @param addr - String derived from the public key. Defaults to equal the value of `pubKey`.
  * @param clist - List of Pact capabilities associated with/installed by this signer.

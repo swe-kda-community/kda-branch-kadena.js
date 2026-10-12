@@ -103,7 +103,7 @@ export const Dynamic: IStory = {
               </a>
             </NavAccordion.Link>
           </NavAccordion.Section>
-          <NavAccordion.Link href="https://docs.kadena.io/">
+          <NavAccordion.Link href="https://kda-chain.org/docs/">
             Documentation
           </NavAccordion.Link>
         </NavAccordion.Root>

@@ -86,9 +86,8 @@ describe('chainweb.transaction', () => {
 
   it('get transaction items by blockhash and validate', async () => {
     server.resetHandlers(
-      http.get(
-        'https://api.chainweb-community.org/chainweb/0.0/mainnet01/cut',
-        () => HttpResponse.json(blockByHeightCurrentCutMock),
+      http.get('https://api.chainweb-community.org/chainweb/0.0/mainnet01/cut', () =>
+        HttpResponse.json(blockByHeightCurrentCutMock),
       ),
       http.post(
         'https://api.chainweb-community.org/chainweb/0.0/mainnet01/chain/0/header/branch',
@@ -131,9 +130,8 @@ describe('chainweb.transaction', () => {
     'should get transactions by maximum number og blocks %p and validate',
     async (n) => {
       server.resetHandlers(
-        http.get(
-          'https://api.chainweb-community.org/chainweb/0.0/mainnet01/cut',
-          () => HttpResponse.json(blockByHeightCurrentCutMock),
+        http.get('https://api.chainweb-community.org/chainweb/0.0/mainnet01/cut', () =>
+          HttpResponse.json(blockByHeightCurrentCutMock),
         ),
         http.post(
           'https://api.chainweb-community.org/chainweb/0.0/mainnet01/chain/0/header/branch',
@@ -166,9 +164,8 @@ describe('chainweb.transaction', () => {
   );
   it('should get recents when default dept is set and limited to 10', async () => {
     server.resetHandlers(
-      http.get(
-        'https://api.chainweb-community.org/chainweb/0.0/mainnet01/cut',
-        () => HttpResponse.json(blockByHeightCurrentCutMock),
+      http.get('https://api.chainweb-community.org/chainweb/0.0/mainnet01/cut', () =>
+        HttpResponse.json(blockByHeightCurrentCutMock),
       ),
       http.post(
         'https://api.chainweb-community.org/chainweb/0.0/mainnet01/chain/0/header/branch',
@@ -192,9 +189,8 @@ describe('chainweb.transaction', () => {
   });
   it('should get recents when default dept is set', async () => {
     server.resetHandlers(
-      http.get(
-        'https://api.chainweb-community.org/chainweb/0.0/mainnet01/cut',
-        () => HttpResponse.json(blockByHeightCurrentCutMock),
+      http.get('https://api.chainweb-community.org/chainweb/0.0/mainnet01/cut', () =>
+        HttpResponse.json(blockByHeightCurrentCutMock),
       ),
       http.post(
         'https://api.chainweb-community.org/chainweb/0.0/mainnet01/chain/0/header/branch',
@@ -252,9 +248,8 @@ describe('Transaction filter', () => {
 describe('chainweb.transaction', () => {
   it('should get transactions by range n', async () => {
     server.resetHandlers(
-      http.get(
-        'https://api.chainweb-community.org/chainweb/0.0/mainnet01/cut',
-        () => HttpResponse.json(blockByHeightCurrentCutMock),
+      http.get('https://api.chainweb-community.org/chainweb/0.0/mainnet01/cut', () =>
+        HttpResponse.json(blockByHeightCurrentCutMock),
       ),
       http.post(
         'https://api.chainweb-community.org/chainweb/0.0/mainnet01/chain/0/header/branch',

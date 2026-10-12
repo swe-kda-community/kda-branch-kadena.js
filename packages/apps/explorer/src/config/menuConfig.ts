@@ -87,7 +87,7 @@ export const menuConfig: IMenuConfig = [
         label: 'Tools',
       },
       {
-        url: 'https://docs.kadena.io/',
+        url: 'https://kda-chain.org/docs/',
         label: 'Developer Docs',
       },
       {

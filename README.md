@@ -59,13 +59,40 @@ Overview of the main packages maintained in this repository:
 
 <!--packageTable end -->
 
+<!-- AI Tools & Agent Tooling -->
+> **Coming soon:** AI Tools & Agent Tooling packages will be listed here (MCP servers, LLM integrations, A2A agent tooling).
+
+## Developer TUI
+
+The monorepo ships a pre-configured terminal UI powered by [apptui](https://github.com/kda-community/apptui) — a single Go binary + `.apptui.json` that gives you a floating command palette, live activity graph, todo list, and terminal tabs for every package in the repo.
+
+**Install apptui once** (requires Go 1.21+):
+
+```bash
+go install github.com/kda-community/apptui@latest
+```
+
+**Launch from the monorepo root:**
+
+```bash
+pnpm run tui   # uses apptui on $PATH
+# or
+./tui          # uses the self-contained binary written by apptui init
+```
+
+The palette covers: **Run** (all dev servers) · **Build** · **Test** · **AI Tools** (MCP server) · **Kadena CLI** · **Workspace** (install, lint, format, changeset) · **Git**.
+
+Config: [`packages/tools/apptui-config`](./packages/tools/apptui-config)
+
+---
+
 ## Contributors
 
 Special thanks to the wonderful people who have contributed to this project:
 
 [![Contributors][96]][95]
 
-[1]: https://docs.kadena.io
+[1]: https://kda-chain.org/docs
 [2]: https://discord.io/kadena
 [3]: https://stackoverflow.com/questions/tagged/kadena
 [4]: ./CONTRIBUTING.md

@@ -13,22 +13,22 @@ const httpHandlers = [
     'https://text-api.chainweb-community.org/api/v1/local',
     () => new HttpResponse('Error-in-fetching'),
   ),
-  http.post('https://json-error.chainweb.com/api/v1/local', () =>
+  http.post('https://json-error.chainweb-community.org/api/v1/local', () =>
     HttpResponse.json({
       result: { status: 'failure', error: 'failure-error' },
     }),
   ),
-  http.post('https://json-error-obj.chainweb.com/api/v1/local', () =>
+  http.post('https://json-error-obj.chainweb-community.org/api/v1/local', () =>
     HttpResponse.json({
       result: { status: 'failure', error: { message: 'failure-error' } },
     }),
   ),
-  http.post('https://custom-error-obj.chainweb.com/api/v1/local', () =>
+  http.post('https://custom-error-obj.chainweb-community.org/api/v1/local', () =>
     HttpResponse.json({
       result: { status: 'failure', error: { text: 'failure-error' } },
     }),
   ),
-  http.post('https://u-error-obj.chainweb.com/api/v1/local', () =>
+  http.post('https://u-error-obj.chainweb-community.org/api/v1/local', () =>
     HttpResponse.json({
       result: { status: 'failure' },
     }),
@@ -43,10 +43,7 @@ afterAll(() => server.close());
 
 describe('callLocal', () => {
   it('returns the correct jsonResponse on success', async () => {
-    const { code } = await fetchModule(
-      'https://json-api.chainweb-community.org',
-      'body',
-    );
+    const { code } = await fetchModule('https://json-api.chainweb-community.org', 'body');
     expect(code).toEqual('module-code');
   });
   it('returns the correct error message from text', async () => {
@@ -58,14 +55,14 @@ describe('callLocal', () => {
   });
   it('returns the correct error message from error', async () => {
     const { error } = await fetchModule(
-      'https://json-error.chainweb.com',
+      'https://json-error.chainweb-community.org',
       'body',
     );
     expect(error).toBe('failure-error');
   });
   it('returns the correct error message from error object', async () => {
     const { error } = await fetchModule(
-      'https://json-error-obj.chainweb.com',
+      'https://json-error-obj.chainweb-community.org',
       'body',
     );
     // expect(error).toBe('{"text":"failure-error"}');
@@ -73,7 +70,7 @@ describe('callLocal', () => {
   });
   it('returns the correct error message from error object', async () => {
     const { error } = await fetchModule(
-      'https://custom-error-obj.chainweb.com',
+      'https://custom-error-obj.chainweb-community.org',
       'body',
     );
     expect(error).toBe('{"text":"failure-error"}');
@@ -81,7 +78,7 @@ describe('callLocal', () => {
   });
   it('returns the correct error message from undefined error', async () => {
     const { error } = await fetchModule(
-      'https://u-error-obj.chainweb.com',
+      'https://u-error-obj.chainweb-community.org',
       'body',
     );
     expect(error).toBe('unknown error');

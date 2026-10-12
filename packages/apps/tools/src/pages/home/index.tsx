@@ -114,7 +114,7 @@ const Home: FC = () => {
             <Link
               className={linkStyle}
               key="chainweb-transfer-link"
-              href="https://docs.kadena.io/build/guides/election-dapp-tutorial/start-a-local-blockchain"
+              href="https://kda-chain.org/docs/build/guides/election-dapp-tutorial/start-a-local-blockchain"
               target="_blank"
               rel="noreferrer"
             />,
@@ -199,7 +199,7 @@ const Home: FC = () => {
                   <li>
                     <a
                       className={linkStyle}
-                      href="https://docs.kadena.io/kadena"
+                      href="https://kda-chain.org/docs/kadena"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -209,7 +209,7 @@ const Home: FC = () => {
                   <li>
                     <a
                       className={linkStyle}
-                      href="https://docs.kadena.io/kadena/why-kadena"
+                      href="https://kda-chain.org/docs/kadena/why-kadena"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -219,7 +219,7 @@ const Home: FC = () => {
                   <li>
                     <a
                       className={linkStyle}
-                      href="https://docs.kadena.io/blogchain/2022/the-story-of-kadenas-proof-of-work-blockchain-2022-10-13"
+                      href="https://kda-chain.org/docs/blogchain/2022/the-story-of-kadenas-proof-of-work-blockchain-2022-10-13"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -229,7 +229,7 @@ const Home: FC = () => {
                   <li>
                     <a
                       className={linkStyle}
-                      href="https://docs.kadena.io/kadena/kda/kda-concepts"
+                      href="https://kda-chain.org/docs/kadena/kda/kda-concepts"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -239,7 +239,7 @@ const Home: FC = () => {
                   <li>
                     <a
                       className={linkStyle}
-                      href="https://docs.kadena.io/kadena/wallets/chainweaver#networksh1378111525"
+                      href="https://kda-chain.org/docs/kadena/wallets/chainweaver#networksh1378111525"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -257,7 +257,7 @@ const Home: FC = () => {
                   <li>
                     <a
                       className={linkStyle}
-                      href="https://docs.kadena.io/build/quickstart"
+                      href="https://kda-chain.org/docs/build/quickstart"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -267,7 +267,7 @@ const Home: FC = () => {
                   <li>
                     <a
                       className={linkStyle}
-                      href="https://docs.kadena.io/pact"
+                      href="https://kda-chain.org/docs/pact"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -277,7 +277,7 @@ const Home: FC = () => {
                   <li>
                     <a
                       className={linkStyle}
-                      href="https://docs.kadena.io/marmalade"
+                      href="https://kda-chain.org/docs/marmalade"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -287,7 +287,7 @@ const Home: FC = () => {
                   <li>
                     <a
                       className={linkStyle}
-                      href="https://docs.kadena.io/kadena/client"
+                      href="https://kda-chain.org/docs/kadena/client"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -297,7 +297,7 @@ const Home: FC = () => {
                   <li>
                     <a
                       className={linkStyle}
-                      href="https://docs.kadena.io/pact/reference/functions"
+                      href="https://kda-chain.org/docs/pact/reference/functions"
                       target="_blank"
                       rel="noreferrer"
                     >

@@ -99,7 +99,7 @@ async function requestNewFund() {
         chainId: chainId,
         contract: 'n_f17eb6408bb84795b1c871efa678758882a8744a.coin-faucet',
         signerKeys: [GAS_PAYER.PUBLIC_KEY],
-        networkId: 'testnet05',
+        networkId: 'testnet06',
       }),
       { noDefaultSender: true },
     );
@@ -123,7 +123,7 @@ async function requestFund() {
         chainId: chainId,
         contract: 'n_f17eb6408bb84795b1c871efa678758882a8744a.coin-faucet',
         signerKeys: [GAS_PAYER.PUBLIC_KEY],
-        networkId: 'testnet05',
+        networkId: 'testnet06',
       }),
       { noDefaultSender: true },
     );

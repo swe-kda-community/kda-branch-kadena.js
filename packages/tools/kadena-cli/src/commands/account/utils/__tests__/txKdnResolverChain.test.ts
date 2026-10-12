@@ -37,20 +37,13 @@ describe('kdnResolveNameToAddress', () => {
     };
   });
   const name = 'name';
-  const network = 'mainnet';
+  const network = 'testnet';
   const networkId = 'networkId';
   const networkHost = 'networkHost';
 
   afterEach(() => {
-    vi.clearAllMocks();
+    vi.resetAllMocks();
   });
-
-  it('should throw an error for name resolution on testnet', async () => {
-    await expect(
-      kdnResolveNameToAddress(name, 'testnet', networkId, networkHost),
-    ).rejects.toThrow('Kadena names are not supported on testnet');
-  });
-
   it('should return address when resolving name', async () => {
     const response = await kdnResolveNameToAddress(
       name,
@@ -87,7 +80,7 @@ describe('kdnResolveNameToAddress', () => {
 describe('kdnResolveAddressToName', () => {
   const address =
     'k:39710afef15243ba36007ae7aa210ab0e09682b2d963928be350e3424b5a420b';
-  const network = 'mainnet';
+  const network = 'testnet';
   const networkId = 'networkId';
   const networkHost = 'networkHost';
   it('should return name when resolving address', async () => {

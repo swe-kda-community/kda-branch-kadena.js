@@ -23,21 +23,21 @@
   },
   "dependencies": {
     "@kadena-dev/eslint-plugin": "workspace:*",
-    "@rushstack/eslint-config": "~3.6.9",
+    "@rushstack/eslint-config": "~3.6.10",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "eslint": "^8.45.0",
+    "eslint": "^8.57.1",
     "eslint-config-next": "13.4.5",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "^9.1.2",
     "eslint-import-resolver-typescript": "3.5.5",
     "eslint-plugin-import": "~2.27.5",
     "eslint-plugin-jsx-a11y": "~6.7.1",
     "eslint-plugin-react": "~7.31.11",
-    "prettier": "~3.2.5",
+    "prettier": "~3.5.3",
     "prettier-eslint": "~12.0.0"
   },
   "devDependencies": {
     "@kadena-dev/shared-config": "workspace:*",
-    "typescript": "5.4.5"
+    "typescript": "^5.8.3"
   }
 }

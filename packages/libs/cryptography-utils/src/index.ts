@@ -4,6 +4,7 @@ export * from './base64UrlEncode';
 export * from './base64UrlEncodeArr';
 export * from './binToHex';
 export * from './genKeyPair';
+export * from './genKeyPairPQ';
 export * from './hash';
 export * from './hashBin';
 export * from './hexToBin';

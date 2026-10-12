@@ -750,7 +750,7 @@ export const exampleExport: ExportFromChainweaver = deepfreeze({
     [
       ['StoreFrontend_Network_Networks', []],
       {
-        Testnet05: ['api.testnet05.chainweb.com'],
+        Testnet06: ['api.testnet.chainweb-community.org'],
         Devnet: ['localhost:8080'],
         Mainnet: ['api.chainweb-community.org'],
         Testnet: ['api.testnet.chainweb-community.org'],

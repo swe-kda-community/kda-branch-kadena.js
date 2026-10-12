@@ -78,7 +78,7 @@ export const analyticsEvent = (
       !explorerUrl &&
       options.sentryData.captureContext?.extra?.res.requestKey
     ) {
-      explorerUrl = `https://explorer.kadena.io/${options.networkId}/transaction/${options.sentryData.captureContext.extra.res.requestKey}`;
+      explorerUrl = `https://explorer.chainweb-community.org/${options.networkId}/transaction/${options.sentryData.captureContext.extra.res.requestKey}`;
     }
 
     const sentryContent = {

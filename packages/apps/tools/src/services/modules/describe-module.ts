@@ -1,3 +1,4 @@
+import type { NetworkIds } from '@/constants/kadena';
 import { kadenaConstants } from '@/constants/kadena';
 import type { INetworkData } from '@/utils/network';
 import { getApiHost } from '@/utils/network';

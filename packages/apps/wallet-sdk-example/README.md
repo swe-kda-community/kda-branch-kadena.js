@@ -140,7 +140,7 @@ details.
 ## **Resources**
 
 - [Kadena Wallet SDK Documentation](https://github.com/kadena-community/kadena.js/tree/feat/wallet-sdk-interface/packages/libs/wallet-sdk/README.md)
-- [Kadena Official Documentation](https://docs.kadena.io/)
+- [Kadena Official Documentation](https://kda-chain.org/docs/)
 - [Kadena GitHub Repository](https://github.com/kadena-io/)
 
 ---

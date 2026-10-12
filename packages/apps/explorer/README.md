@@ -104,5 +104,5 @@ See [CHANGELOG.md][16].
 [12]: https://pnpm.io/installation
 [13]: https://docs.docker.com/get-docker/
 [14]: https://podman.io/docs/installation
-[15]: https://docs.kadena.io/build/quickstart
+[15]: https://kda-chain.org/docs/build/quickstart
 [16]: ./CHANGELOG.md

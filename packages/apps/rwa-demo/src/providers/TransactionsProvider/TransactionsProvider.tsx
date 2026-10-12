@@ -90,7 +90,7 @@ export const TransactionsProvider: FC<PropsWithChildren> = ({ children }) => {
                 intent: 'negative',
                 label: message,
                 message: interpretErrorMessage(message),
-                url: `https://explorer.kadena.io/${activeNetwork.name}/transaction/${data.requestKey}`,
+                url: `https://explorer.chainweb-community.org/${activeNetwork.name}/transaction/${data.requestKey}`,
               },
               {
                 name: `error:${data.type.name}`,
@@ -123,7 +123,7 @@ export const TransactionsProvider: FC<PropsWithChildren> = ({ children }) => {
               intent: 'negative',
               label: 'invalid transaction',
               message: JSON.stringify(errorData),
-              url: `https://explorer.kadena.io/${activeNetwork.networkId}/transaction/${data.requestKey}`,
+              url: `https://explorer.chainweb-community.org/${activeNetwork.networkId}/transaction/${data.requestKey}`,
             },
             {
               name: `error:${data.type.name}`,

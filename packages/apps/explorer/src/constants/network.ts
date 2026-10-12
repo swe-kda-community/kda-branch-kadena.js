@@ -22,7 +22,7 @@ export const networkConstants: INetwork[] = [
     chainwebUrl: 'api.chainweb-community.org',
     graphUrl: 'https://graph.kadena.network/graphql',
     wsGraphUrl: 'https://graph.kadena.network/graphql',
-    explorerUrl: 'https://explorer.kadena.io/',
+    explorerUrl: 'https://explorer.chainweb-community.org/',
   },
   {
     networkId: 'testnet06',
@@ -31,6 +31,6 @@ export const networkConstants: INetwork[] = [
     chainwebUrl: 'api.testnet.chainweb-community.org',
     graphUrl: 'https://graph.testnet.kadena.network/graphql',
     wsGraphUrl: 'https://graph.testnet.kadena.network/graphql',
-    explorerUrl: 'https://explorer.testnet.kadena.io/',
+    explorerUrl: 'https://explorer.chainweb-community.org/',
   },
 ];

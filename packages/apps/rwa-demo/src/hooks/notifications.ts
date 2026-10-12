@@ -17,7 +17,7 @@ export const useNotifications = () => {
   ) => {
     if (analytics) {
       const explorerUrl = analytics.options?.requestKey
-        ? `https://explorer.kadena.io/${activeNetwork.networkId}/transaction/${analytics.options.requestKey}`
+        ? `https://explorer.chainweb-community.org/${activeNetwork.networkId}/transaction/${analytics.options.requestKey}`
         : undefined;
 
       analyticsEvent(analytics.name, {

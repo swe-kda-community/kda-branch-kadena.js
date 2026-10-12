@@ -32,7 +32,7 @@ describe('retrieveContractFromChain', () => {
         network: 'mainnet',
         networkId: 'mainnet01',
         networkHost: 'https://api.chainweb-community.org',
-        networkExplorerUrl: 'https://explorer.chainweb.com/mainnet/tx/',
+        networkExplorerUrl: 'https://explorer.chainweb-community.org/mainnet/tx/',
       },
       'https://api.chainweb-community.org/chainweb/0.0/mainnet01/chain/8/pact',
     );
@@ -49,7 +49,7 @@ describe('retrieveContractFromChain', () => {
           network: 'mainnet',
           networkId: 'mainnet01',
           networkHost: 'https://api.chainweb-community.org',
-          networkExplorerUrl: 'https://explorer.chainweb.com/mainnet/tx/',
+          networkExplorerUrl: 'https://explorer.chainweb-community.org/mainnet/tx/',
         },
         'https://api.chainweb-community.org/chainweb/0.0/mainnet01/chain/1/pact',
       ),

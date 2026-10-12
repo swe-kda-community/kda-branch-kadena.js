@@ -8,4 +8,4 @@ This is a project with Kadena Blockchain integration bootstrapped with
 To learn more about Kadena, take a look at the following resources:
 
 - [https://kadena.io/](https://kadena.io/) - Kadena general website.
-- [https://docs.kadena.io/](https://nextjs.org/learn) - Kadena documentation.
+- [https://kda-chain.org/docs/](https://nextjs.org/learn) - Kadena documentation.

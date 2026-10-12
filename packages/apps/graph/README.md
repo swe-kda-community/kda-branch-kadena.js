@@ -222,7 +222,7 @@ Prerequisites:
 - [pnpm](https://pnpm.io/installation)
 - [Docker](https://docs.docker.com/get-docker/) (or an alternative, e.g. [podman](https://podman.io/docs/installation))
 
-This project has a built-in command to create and start devnet. For the full guide visit the quickstart page on the documentation website [here](https://docs.kadena.io/build/quickstart).
+This project has a built-in command to create and start devnet. For the full guide visit the quickstart page on the documentation website [here](https://kda-chain.org/docs/build/quickstart).
 
 This command will start the existing image, and if not found, download and run a new image. You can run `pnpm run devnet:update` to update the devnet image.
 

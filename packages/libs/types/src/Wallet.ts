@@ -15,7 +15,7 @@ export interface ISigningCap {
 
 /**
  * The signing request is handled by the sign endpoint of wallets.
- * See endpoint here: https://kadena-io.github.io/signing-api/#/definitions/SigningRequest
+ * * See endpoint here: https://kda-chain.org/docs/build/pact/concepts/signing-api
  *
  * @alpha
  */

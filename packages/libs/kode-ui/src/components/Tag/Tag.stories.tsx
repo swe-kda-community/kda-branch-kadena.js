@@ -120,7 +120,7 @@ export const AsChild: Story = {
     return (
       <TagGroup label="Kadena Resources" tagAsChild>
         <TagItem key="docs">
-          <a href="https://docs.kadena.io/">Kadena Docs</a>
+          <a href="https://kda-chain.org/docs/">Kadena Docs</a>
         </TagItem>
         <TagItem key="tools">
           <a href="https://tools.kadena.io/">Tools Website</a>

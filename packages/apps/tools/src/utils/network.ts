@@ -50,9 +50,9 @@ export const getAllNetworks = (
     );
   }
 
-  // remove leftover `testnet05` from the localStorage to clean up the users data
+  // remove leftover `testnet05` and `testnet04` from the localStorage to clean up the users data
   return allNetworkObjects.filter(
-    (item) => (item.networkId as string) !== 'testnet05',
+    (item) => !(['testnet04', 'testnet05'] as string[]).includes(item.networkId as string),
   );
 };
 

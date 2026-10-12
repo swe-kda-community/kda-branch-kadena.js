@@ -1,5 +1,6 @@
 import { vol } from 'memfs';
 import type { Dirent, Stats } from 'node:fs';
+import { dirname } from 'path';
 import type { IFileSystemService } from './fs.service.js';
 
 export const fs: typeof vol.promises = vol.promises;
@@ -50,7 +51,9 @@ export const memoryFileSystemService: IFileSystemService = {
   async ensureDirectoryExists(path: string) {
     if (await memoryFileSystemService.directoryExists(path)) return;
 
-    await fs.mkdir(path, {
+    const isFile = path.split('/').pop()?.includes('.') ?? false;
+
+    await fs.mkdir(isFile ? dirname(path) : path, {
       recursive: true,
     });
   },

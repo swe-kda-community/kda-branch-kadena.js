@@ -1,0 +1,43 @@
+{
+  "name": "@kadena/agent-skills",
+  "version": "0.1.0",
+  "description": "Pre-built A2A agent skills for Kadena blockchain operations",
+  "keywords": ["kadena", "a2a", "agent", "skills", "blockchain", "ai"],
+  "license": "BSD-3-Clause",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./wallet": {
+      "import": "./dist/skills/wallet.js",
+      "types": "./dist/skills/wallet.d.ts"
+    },
+    "./defi": {
+      "import": "./dist/skills/defi.js",
+      "types": "./dist/skills/defi.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "test": "vitest run",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kadena/ai-tools": "workspace:*",
+    "@kadena/client": "workspace:*",
+    "@kadena/types": "workspace:*",
+    "zod": "~3.25.76"
+  },
+  "devDependencies": {
+    "@kadena-dev/shared-config": "workspace:*",
+    "@types/node": "^22.15.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4"
+  }
+}

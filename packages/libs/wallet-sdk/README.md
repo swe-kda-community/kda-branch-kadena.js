@@ -648,9 +648,7 @@ getChains(networkHost: string): Promise<IChain[]>;
 **Example:**
 
 ```typescript
-const chains = await walletSdk.getChains(
-  'https://api.testnet.chainweb-community.org',
-);
+const chains = await walletSdk.getChains('https://api.testnet.chainweb-community.org');
 
 chains.forEach((chain) => {
   console.log('Available chain ID:', chain.id);
@@ -865,7 +863,7 @@ documentation, explore the features, and start building today!
 ## Additional Resources
 
 - [Kadena Official Website](https://kadena.io/)
-- [Kadena Documentation](https://docs.kadena.io/)
+- [Kadena Documentation](https://kda-chain.org/docs/)
 - [Kadena GitHub Repository](https://github.com/kadena-io/)
 
 ---

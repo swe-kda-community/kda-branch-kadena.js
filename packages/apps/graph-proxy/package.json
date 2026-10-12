@@ -14,16 +14,16 @@
   },
   "dependencies": {
     "@vercel/edge": "^1.2.2",
-    "dotenv": "~16.4.5",
-    "typescript": "5.4.5",
-    "vercel": "^48.4.0"
+    "dotenv": "~16.4.7",
+    "typescript": "^5.8.3",
+    "vercel": "^48.12.1"
   },
   "devDependencies": {
     "@kadena-dev/eslint-config": "workspace:*",
     "@kadena-dev/lint-package": "workspace:*",
     "@kadena-dev/shared-config": "workspace:*",
-    "eslint": "^8.45.0",
-    "prettier": "~3.2.5",
-    "vitest": "^1.6.0"
+    "eslint": "^8.57.1",
+    "prettier": "~3.5.3",
+    "vitest": "^3.2.4"
   }
 }

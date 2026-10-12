@@ -200,9 +200,8 @@ describe('chainweb.block', () => {
     'gets recent blocks with limit %p',
     async (n) => {
       server.resetHandlers(
-        http.get(
-          'https://api.chainweb-community.org/chainweb/0.0/mainnet01/cut',
-          () => HttpResponse.json(blockByHeightCurrentCutMock),
+        http.get('https://api.chainweb-community.org/chainweb/0.0/mainnet01/cut', () =>
+          HttpResponse.json(blockByHeightCurrentCutMock),
         ),
         http.post(
           'https://api.chainweb-community.org/chainweb/0.0/mainnet01/chain/0/header/branch',

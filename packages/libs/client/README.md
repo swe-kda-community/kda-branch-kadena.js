@@ -571,8 +571,8 @@ We are available via Discord and Github issues:
 [29]:
   https://github.com/kadena-community/kadena.js/blob/main/packages/libs/client-examples/src/example-contract/simple-transfer.ts
 [30]:
-  https://docs.kadena.io/pact/reference/concepts#signature-capabilitiesh289463870
-[31]: https://kadena-io.github.io/signing-api/
+  https://kda-chain.org/docs/pact/reference/concepts#signature-capabilitiesh289463870
+[31]: https://kda-chain.org/docs/build/pact/concepts/signing-api
 [32]:
   https://github.com/kadena-io/wallet-connect-example/blob/main/src/providers/ClientContextProvider.tsx#L69C6-L69C6
 [33]:

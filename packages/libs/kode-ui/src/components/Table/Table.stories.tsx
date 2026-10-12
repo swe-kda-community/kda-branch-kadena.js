@@ -23,7 +23,7 @@ const rows = [
     name: 'Docs',
     date: '4/7/2021',
     type: 'Documentation',
-    href: 'https://docs.kadena.io',
+    href: 'https://kda-chain.org/docs',
   },
   {
     id: 3,

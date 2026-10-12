@@ -44,4 +44,4 @@ Fix Memory Leak in Data Processing Module
 - [ ] I ran `pnpm changeset` in the root of the monorepo
 - [ ] Test coverage has not decreased
 - [ ] Docs have been updated to reflect changes in PR (don't forget
-      docs.kadena.io)
+      kda-chain.org/docs)

@@ -115,7 +115,7 @@ export const networkExplorerUrlPrompt: IPrompt<string> = async (
   const defaultValue = (args.defaultValue ??
     previousQuestions.defaultValue) as string;
   return await getInputPrompt(
-    'Enter Kadena network explorer URL (e.g. "https://explorer.chainweb.com/mainnet/tx/"):',
+    'Enter Kadena network explorer URL (e.g. "https://explorer.chainweb-community.org/mainnet/tx/"):',
     defaultValue,
   );
 };

@@ -1,4 +1,0 @@
-is_topmost_config = true
-
-[inference]
-extra_context = "/home/notbob/.cosine/AGENTS.md"
